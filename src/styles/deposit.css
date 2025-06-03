@@ -1,0 +1,39 @@
+.withdraw-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f5f3ff;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.withdraw-card {
+  max-width: 500px;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.available-balance-display {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #e6f7ff;
+  border-left: 4px solid #1890ff;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.final-amount-text {
+  font-size: 1.1em;
+  color: #52c41a;
+  font-weight: bold;
+}

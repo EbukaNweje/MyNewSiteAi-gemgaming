@@ -1,0 +1,56 @@
+.transaction-history-container {
+    min-height: 100vh;
+    width: 100%;
+    background-color: #eff8ed;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.transaction-card {
+    width: 100%;
+    max-width: 1200px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.transaction-details-modal-content {
+    padding: 15px 0;
+    line-height: 1.8;
+}
+
+.transaction-details-modal-content p {
+    margin-bottom: 8px;
+}
+
+.modal-close-button {
+}
+
+.ant-btn-primary {
+    background: linear-gradient(45deg, #38b000, #2a7a00) !important;
+    border-color: #38b000 !important;
+    color: white !important;
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+    background: linear-gradient(45deg, #44cc00, #329a00) !important;
+    border-color: #44cc00 !important;
+}
+
+.ant-btn-primary[disabled] {
+    background: #e0e0e0 !important;
+    border-color: #dcdcdc !important;
+    color: #a0a0a0 !important;
+    box-shadow: none !important;
+}
+
+.ant-form-item {
+    margin-bottom: 24px;
+}

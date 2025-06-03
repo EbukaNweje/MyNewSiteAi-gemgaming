@@ -1,0 +1,297 @@
+/* Existing styles (unchanged parts) */
+.dashboard_body {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #f5f3ff;
+    padding: 2rem 0;
+    box-sizing: border-box;
+}
+
+.dashboard_wrapper {
+    width: 95%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.amount_card {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.wallet_balance {
+    flex: 1;
+    background-color: #38b000;
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    min-width: 260px;
+}
+
+.balance_wrapper h4 {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.wallet_amount {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 24px;
+}
+
+.wallet_footer p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.transaction_chart {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    height: auto;
+    width: 100%;
+}
+
+.chart_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.chart_header h4 {
+    color: #38b000;
+    font-family: "Poppins", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.chart_header p {
+    color: #333;
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.chart_body {
+    width: 100%;
+    height: 300px;
+}
+
+.transaction_table {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    overflow-x: auto;
+}
+
+.table_header {
+    margin-bottom: 1rem;
+}
+
+.table_header h4 {
+    color: #38b000;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.table_body .ant-table-wrapper {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* New: Container for action buttons to manage spacing */
+.crypto-action-buttons-container {
+    display: flex;
+    gap: 8px; /* A little gap between buttons */
+    justify-content: center; /* Center buttons within their cell if needed */
+    flex-wrap: wrap; /* Allow buttons to wrap to the next line if space is very limited */
+}
+
+.crypto-action-btn {
+    color: white;
+    border: none;
+    padding: 6px 12px; 
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px; 
+    transition: background-color 0.2s ease-in-out;
+    flex-shrink: 0; /* Prevent buttons from shrinking below their content size */
+    margin: 0;
+}
+
+.deposit-btn {
+    background-color: #38b000;
+}
+
+.deposit-btn:hover {
+    background-color: #329a00;
+}
+
+.withdraw-btn {
+    background-color: #dc3545;
+}
+
+.withdraw-btn:hover {
+    background-color: #c82333;
+}
+
+.ant-btn-primary {
+    background: linear-gradient(45deg, #38b000, #2a7a00) !important;
+    border-color: #38b000 !important;
+    color: white !important;
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+    background: linear-gradient(45deg, #44cc00, #329a00) !important;
+    border-color: #44cc00 !important;
+}
+
+.ant-btn-primary[disabled] {
+    background: #e0e0e0 !important;
+    border-color: #dcdcdc !important;
+    color: #a0a0a0 !important;
+    box-shadow: none !important;
+}
+
+.ant-form-item {
+    margin-bottom: 24px;
+}
+@media (max-width: 768px) {
+    .dashboard_body {
+        padding: 1.5rem 0.5rem;
+    }
+
+    .dashboard_wrapper {
+        width: 98%;
+        gap: 15px;
+    }
+
+    .amount_card {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .wallet_balance {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .balance_wrapper h4 {
+        font-size: 16px;
+    }
+
+    .wallet_amount {
+        font-size: 22px;
+    }
+
+    .chart_header h4 {
+        font-size: 18px;
+    }
+
+    .chart_header p {
+        font-size: 14px;
+    }
+
+    .chart_body {
+        height: 250px;
+    }
+
+    .transaction_table {
+        padding: 0.8rem;
+    }
+
+    .table_header h4 {
+        font-size: 18px;
+    }
+
+    .crypto-action-btn {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+
+    .crypto-action-buttons-container {
+        gap: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard_body {
+        padding: 1rem 0.25rem;
+    }
+
+    .dashboard_wrapper {
+        width: 100%;
+        gap: 10px;
+    }
+
+    .wallet_balance {
+        padding: 0.8rem;
+    }
+
+    .balance_wrapper h4 {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .wallet_amount {
+        font-size: 20px;
+        gap: 8px;
+    }
+
+    .wallet_footer p {
+        font-size: 12px;
+    }
+
+    .transaction_chart,
+    .transaction_table {
+        padding: 0.7rem;
+    }
+
+    .chart_header {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 0.8rem;
+    }
+
+    .chart_header h4 {
+        font-size: 16px;
+    }
+
+    .chart_header p {
+        font-size: 12px;
+    }
+
+    .chart_body {
+        height: 200px;
+    }
+
+    .table_header h4 {
+        font-size: 16px;
+    }
+
+    .crypto-action-btn {
+        padding: 4px 8px; 
+        font-size: 10px; 
+    }
+    .crypto-action-buttons-container {
+        gap: 10px;
+    }
+}

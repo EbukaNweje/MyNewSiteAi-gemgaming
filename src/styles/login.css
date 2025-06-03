@@ -1,0 +1,35 @@
+.login-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f5f3ff;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.login-card {
+  max-width: 500px;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  padding: 13px;
+}
+
+.site-form-item-icon {
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.ant-form-item-label > label {
+  font-weight: 600;
+  color: #333;
+}
+
+.login-form-forgot,
+.login-page-container a {
+  color: #38b000;
+}
+
+.login-page-container a:hover {
+  text-decoration: underline;
+}

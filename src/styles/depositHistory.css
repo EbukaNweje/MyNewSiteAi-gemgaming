@@ -1,0 +1,74 @@
+/* src/styles/depositHistory.css */
+
+/* This will make the container take the full screen height and width */
+.deposit-history-container {
+    min-height: 100vh; /* Takes at least the full viewport height */
+    width: 100%;    /* Takes the full viewport width */
+    background-color: #eff8ed; /* Consistent light green background */
+    padding: 20px; /* Add some padding around the content */
+    box-sizing: border-box; /* Include padding in the element's total width and height */
+
+    /* Optional: Center content horizontally and vertically if you want */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Align content to the top */
+}
+
+/* Style for the Table itself, to give it some visual presence */
+.deposit-history-container .ant-table-wrapper {
+    width: 100%; /* Make the table take full width of its container */
+    max-width: 1200px; /* Optional: Limit max width for very large screens */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 15px;
+    margin-top: 20px; /* Space between title and table */
+}
+
+/* Style for the Modal content */
+.deposit-details-modal-content {
+    padding: 15px 0;
+    line-height: 1.8;
+}
+
+.deposit-details-modal-content p {
+    margin-bottom: 8px; /* Slightly reduce space between paragraphs */
+}
+
+/* Specific class for the modal close button */
+.modal-close-button {
+    /* Add any specific styles for this button here if needed.
+       It will inherit Ant Design's primary button styles by default
+       because of type="primary" in the component.
+       For example:
+       font-weight: bold;
+       letter-spacing: 0.5px;
+    */
+}
+
+/* Ant Design Overrides for consistent primary button styling across components */
+/* These apply globally unless a more specific class overrides them */
+.ant-btn-primary {
+    background: linear-gradient(45deg, #38b000, #2a7a00) !important;
+    border-color: #38b000 !important;
+    color: white !important;
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+    background: linear-gradient(45deg, #44cc00, #329a00) !important;
+    border-color: #44cc00 !important;
+}
+
+.ant-btn-primary[disabled] {
+    background: #e0e0e0 !important;
+    border-color: #dcdcdc !important;
+    color: #a0a0a0 !important;
+    box-shadow: none !important;
+}
+
+/* Ensure form item margins are consistent (if any forms exist in this component) */
+.ant-form-item {
+    margin-bottom: 24px;
+}

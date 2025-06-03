@@ -1,0 +1,10 @@
+.dashboardHeader_body{
+    width: 100%;
+    height: 12vh;
+    display: flex;
+    justify-content: center;
+    background-color:  rgb(232, 154, 232);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}

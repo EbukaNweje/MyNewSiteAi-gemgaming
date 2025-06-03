@@ -1,0 +1,551 @@
+/* src/styles/headsOrTails.css */
+
+/* General Body/Page Styling for Casino Theme */
+body {
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460); /* Deep blue/purple gradient */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+    color: #e0e0e0; /* Light gray for general text */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    padding: 20px; /* Some padding around the page */
+}
+
+/* Main Container for the entire page */
+.casino-page-container {
+    width: 100%;
+    max-width: 900px; /* Limit overall width for better presentation */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align card to top if page is taller */
+    min-height: 100vh; /* Ensure container fills viewport height */
+    padding: 20px 0;
+}
+
+/* Central Game Card - Ant Design Card Customization */
+.game-card {
+    background: rgba(26, 33, 46, 0.9); /* Darker, slightly transparent background */
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(255, 255, 255, 0.1); /* Stronger shadow, subtle border glow */
+    border: none; /* Remove default Ant Design border */
+    width: 100%;
+    max-width: 500px; /* Max width for the game card itself */
+    overflow: hidden; /* Ensures border-radius applies to children */
+    padding: 20px; /* Internal padding */
+}
+
+.game-card .ant-card-head {
+    background: rgba(30, 40, 60, 0.8); /* Slightly lighter header background */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
+    text-align: center;
+    border-top-left-radius: 20px; /* Match card border radius */
+    border-top-right-radius: 20px; /* Match card border radius */
+    padding: 16px 24px; /* Default AntD padding for card head */
+}
+
+.game-card .ant-card-head-title {
+    color: #e0e0e0 !important; /* Ensure title color is white */
+    font-size: 1.8em !important;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.game-card .card-extra-icon {
+    color: #e0e0e0 !important; /* White icon */
+    font-size: 24px !important;
+}
+
+.game-card .ant-card-body {
+    padding: 24px; /* Standard AntD body padding */
+    background: transparent; /* Ensure body background is transparent to show card background */
+}
+
+/* Typography Overrides */
+.ant-typography {
+    color: #e0e0e0;
+}
+
+/* Balance Display */
+.balance-display {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    margin-bottom: 25px;
+    background: rgba(0, 0, 0, 0.3); /* Slightly darker background for balance */
+    border-radius: 10px;
+    padding: 10px 20px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.balance-label {
+    font-size: 1.2em;
+    color: rgba(255, 255, 255, 0.6);
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.balance-value {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #4CAF50; /* Green for positive balance */
+    text-shadow: 0 0 8px rgba(76, 175, 80, 0.7);
+    letter-spacing: 1px;
+}
+
+/* Bet Input Section */
+.bet-input-section {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.min-max-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-size: 0.85em;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.bet-input-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.bet-adjust-button {
+    background-color: #3f51b5; /* Blue */
+    border-color: #3f51b5;
+    color: white;
+    font-size: 1.5em;
+    height: 48px; /* Match input height */
+    width: 48px;
+    min-width: 48px;
+    border-radius: 10px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.bet-adjust-button:hover:not([disabled]) {
+    background-color: #303f9f;
+    border-color: #303f9f;
+    transform: translateY(-2px);
+}
+
+.bet-adjust-button[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.bet-input-number.ant-input-number {
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: #e0e0e0;
+    font-size: 1.5em;
+    padding: 10px 15px;
+    height: 48px; /* Standard height for inputs */
+    width: 100%; /* Take full width within its flex container */
+}
+
+.bet-input-number.ant-input-number-focused,
+.bet-input-number.ant-input-number:hover {
+    border-color: #64b5f6 !important; /* Lighter blue on focus/hover */
+    box-shadow: 0 0 0 2px rgba(100, 181, 246, 0.2);
+}
+
+.bet-input-number .ant-input-number-handler-wrap {
+    display: none; /* Hide default Ant Design spin buttons */
+}
+
+.input-coin-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    filter: invert(1); /* Make the icon white */
+}
+
+/* Quick Bet Buttons */
+.quick-bet-buttons {
+    margin-top: 15px;
+    justify-content: center; /* Center the buttons */
+    width: 100%;
+}
+
+.quick-bet-value-button {
+    background-color: #424242; /* Dark gray */
+    border-color: #424242;
+    color: #e0e0e0;
+    border-radius: 8px;
+    padding: 8px 15px;
+    font-size: 1em;
+    flex-grow: 1; /* Allow buttons to grow */
+    min-width: 70px; /* Minimum width */
+    max-width: 100px; /* Maximum width */
+    text-align: center;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.quick-bet-value-button:hover:not([disabled]) {
+    background-color: #616161;
+    border-color: #616161;
+    transform: translateY(-2px);
+}
+
+.quick-bet-value-button[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Coin Display Area Layout */
+.coin-display-area {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr; /* Left sidebar, Coin area, Right sidebar */
+    gap: 15px;
+    align-items: center;
+    margin: 30px 0;
+    min-height: 150px; /* Ensure space for coin area */
+}
+
+.recent-results-column, .how-to-play-sidebar {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    height: 100%; /* Fill height */
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.recent-results-column .ant-typography-strong,
+.how-to-play-sidebar .ant-typography-strong {
+    color: #e0e0e0;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+}
+
+.recent-result-item {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: white;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.recent-result-item.win {
+    background-color: #4CAF50; /* Green for win */
+}
+
+.recent-result-item.lose {
+    background-color: #f44336; /* Red for loss */
+}
+
+.how-to-play-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.how-to-play-sidebar ul li {
+    margin-bottom: 5px;
+}
+
+/* Main Coin Area */
+.main-coin-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 150px; /* Ensure minimum height */
+    position: relative;
+}
+
+.coin-placeholder-initial {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+}
+
+/* Coin Animation and Result Display */
+.coin-animation {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 500px; /* For 3D flip effect */
+}
+
+.coin {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.3);
+    border: 3px solid #ffd700; /* Gold border */
+    transition: transform 0.5s ease-out; /* Smooth transition for result display */
+}
+
+/* Heads and Tails specific coin images */
+.coin.static.heads {
+    background-image: url('https://img.icons8.com/ios-filled/100/ffffff/coin-in-hand.png'); /* Placeholder for heads image */
+    background-color: #ffeb3b; /* Goldish background for heads */
+}
+
+.coin.static.tails {
+    background-image: url('https://img.icons8.com/ios-filled/100/ffffff/stack-of-coins.png'); /* Placeholder for tails image */
+    background-color: #c0c0c0; /* Silverish background for tails */
+}
+
+/* Coin flipping animation */
+.coin.flipping {
+    animation: flipCasinoCoin 2.5s infinite ease-in-out;
+}
+
+@keyframes flipCasinoCoin {
+    0% {
+        transform: rotateY(0deg);
+    }
+    25% {
+        transform: rotateY(900deg) scale(1.1); /* Faster spin, slightly larger */
+    }
+    50% {
+        transform: rotateY(1800deg);
+    }
+    75% {
+        transform: rotateY(2700deg) scale(1.1);
+    }
+    100% {
+        transform: rotateY(3600deg);
+    }
+}
+
+.coin-result-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+}
+
+.final-result-text {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #e0e0e0;
+}
+
+.final-result-text span {
+    color: #4CAF50; /* Green for wins */
+}
+
+.coin-result-display.lose .final-result-text span {
+    color: #f44336; /* Red for losses */
+}
+
+/* Heads/Tails Choice Buttons */
+.choice-buttons-section {
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.choice-button {
+    flex: 1;
+    height: 60px;
+    font-size: 1.3em;
+    font-weight: bold;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.choice-button.heads-button {
+    background-color: #FFC107; /* Amber for Heads */
+    border-color: #FFC107;
+    color: #333;
+}
+
+.choice-button.tails-button {
+    background-color: #BDBDBD; /* Gray for Tails */
+    border-color: #BDBDBD;
+    color: #333;
+}
+
+.choice-button.heads-button.ant-btn-primary {
+    background-color: #FFA000; /* Darker Amber when selected */
+    border-color: #FFA000;
+    box-shadow: 0 0 15px rgba(255, 160, 0, 0.6);
+    color: white;
+}
+
+.choice-button.tails-button.ant-btn-primary {
+    background-color: #757575; /* Darker Gray when selected */
+    border-color: #757575;
+    box-shadow: 0 0 15px rgba(117, 117, 117, 0.6);
+    color: white;
+}
+
+.choice-button:hover:not(.ant-btn-primary):not([disabled]) {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.choice-button .pays-text {
+    font-size: 0.7em;
+    font-weight: normal;
+    opacity: 0.8;
+}
+
+/* Flip Button */
+.flip-button {
+    background-color: #4CAF50; /* Green */
+    border-color: #4CAF50;
+    height: 60px;
+    font-size: 1.8em;
+    font-weight: bold;
+    border-radius: 12px;
+    letter-spacing: 1px;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+}
+
+.flip-button:hover:not([disabled]) {
+    background-color: #388E3C; /* Darker green on hover */
+    border-color: #388E3C;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.flip-button[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #616161 !important; /* Dark gray when disabled */
+    border-color: #616161 !important;
+}
+
+
+/* Bet History Tabs */
+.bet-history-tabs {
+    display: flex;
+    justify-content: space-around;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    margin-top: 30px;
+    padding: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.tab-header {
+    flex: 1;
+    text-align: center;
+    padding: 10px 0;
+    cursor: pointer;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.3s, background-color 0.3s;
+    border-radius: 8px;
+}
+
+.tab-header.active {
+    background-color: #3f51b5; /* Blue when active */
+    color: white;
+    box-shadow: 0 2px 10px rgba(63, 81, 181, 0.5);
+}
+
+.tab-header:hover:not(.active) {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.tab-content-placeholder {
+    margin-top: 15px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    text-align: center;
+    min-height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Game Info/Rules */
+.game-info {
+    margin-top: 20px;
+    text-align: center;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-size: 0.9em;
+}
+
+/* Ant Design Overrides for dark theme */
+.ant-form-item-label > label {
+    color: #e0e0e0 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .casino-page-container {
+        padding: 10px;
+    }
+    .game-card {
+        padding: 15px;
+    }
+    .game-card .ant-card-head {
+        padding: 12px 18px;
+    }
+    .game-card .ant-card-head-title {
+        font-size: 1.5em !important;
+    }
+    .balance-value {
+        font-size: 2em;
+    }
+    .bet-input-number.ant-input-number,
+    .bet-adjust-button,
+    .flip-button,
+    .choice-button {
+        height: 48px;
+        font-size: 1.2em;
+    }
+    .coin-display-area {
+        grid-template-columns: 1fr; /* Stack columns on small screens */
+    }
+    .recent-results-column, .how-to-play-sidebar {
+        min-height: auto;
+    }
+    .recent-results-column {
+        flex-direction: row; /* Display recent results in a row */
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+    }
+    .how-to-play-sidebar ul {
+        text-align: center;
+    }
+}

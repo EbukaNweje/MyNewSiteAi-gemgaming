@@ -1,0 +1,607 @@
+.withdraw-page-container {
+  padding: 40px 20px;
+  background-color: #eff8ed;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+.withdraw-card {
+  width: 100%;
+  max-width: 800px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.withdraw-card .ant-card-head-wrapper {
+  justify-content: center;
+}
+
+.withdraw-card .ant-card-head {
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 16px;
+}
+
+.available-balance-display {
+  margin-bottom: 24px;
+  text-align: right;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.final-amount-text {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #38b000;
+}
+
+.withdrawal-receipt-modal .ant-modal-content {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 0;
+}
+
+.withdrawal-receipt-modal .ant-modal-footer {
+  padding: 10px 24px;
+  text-align: right;
+  border-top: 1px solid #f0f0f0;
+}
+
+.withdrawal-receipt-content {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  padding: 20px;
+  background-color: #fff;
+  color: #333;
+  line-height: 1.4;
+  font-size: 13px;
+}
+
+.receipt-header {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.header-logo {
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.receipt-title.ant-typography {
+  font-size: 20px !important;
+  font-weight: 600;
+  margin-bottom: 0 !important;
+}
+
+.receipt-divider.ant-divider {
+  margin: 15px 0;
+  border-color: #f0f0f0;
+}
+
+.receipt-section {
+  margin-bottom: 15px;
+}
+
+.receipt-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+}
+
+.receipt-label {
+  font-weight: 500;
+  color: #555;
+}
+
+.receipt-value {
+  font-weight: normal;
+  color: #333;
+  text-align: right;
+  font-size: 13px;
+}
+
+.total .receipt-label,
+.total .receipt-value.final-amount {
+  font-weight: bold;
+  color: #38b000;
+  font-size: 15px;
+}
+
+.address,
+.id {
+  font-family: 'Menlo', monospace;
+  font-size: 0.85em;
+  background-color: #f9f9f9;
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+
+.status-pending {
+  color: #f9a825;
+}
+
+.status-completed {
+  color: #4caf50;
+}
+
+.status-failed {
+  color: #f44336;
+}
+
+.status-awaiting-deposit {
+  color: #1890ff;
+}
+
+.status-confirmed {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.receipt-footer {
+  text-align: center;
+  font-size: 0.75em;
+  color: #777;
+  padding-top: 10px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.footer-disclaimer {
+  margin-bottom: 0;
+}
+
+@media (max-width: 576px) {
+  .withdrawal-receipt-modal .ant-modal-footer {
+    padding: 10px 16px;
+  }
+
+  .withdrawal-receipt-content {
+    padding: 15px;
+    font-size: 12px;
+  }
+
+  .receipt-title.ant-typography {
+    font-size: 18px !important;
+  }
+
+  .receipt-row {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 4px 0;
+  }
+
+  .receipt-label {
+    padding-bottom: 2px;
+  }
+
+  .receipt-value {
+    text-align: left;
+  }
+
+  .address,
+  .id {
+    font-size: 0.8em;
+  }
+
+  .total .receipt-label,
+  .total .receipt-value.final-amount {
+    font-size: 14px;
+  }
+}
+
+.withdraw-page-container {
+  background: linear-gradient(135deg, #eff8ed, #e6f3e4);
+}
+
+.withdraw-card.game-card {
+  max-width: 480px;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+
+.withdraw-card.game-card .ant-card-head {
+  border-bottom: none;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.withdraw-card.game-card .ant-card-head .card-title {
+  text-align: center;
+  margin: 0 !important;
+  color: #38b000;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.8em !important;
+}
+
+.game-card .balance-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: linear-gradient(45deg, #e6f3e4, #d4edda);
+  border-radius: 12px;
+  margin-bottom: 25px;
+  font-size: 1.1em;
+  color: #555;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.game-card .balance-label {
+  font-weight: 500;
+  color: #2a7a00;
+}
+
+.game-card .balance-value {
+  font-weight: 700;
+  color: #1e5a00;
+  font-size: 1.3em;
+}
+
+.game-card .ant-form-item-label > label {
+  font-weight: 500;
+  color: #555;
+}
+
+.game-card .ant-input-number {
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.game-card .ant-input-number:hover,
+.game-card .ant-input-number:focus {
+  border-color: #38b000;
+  box-shadow: 0 0 0 2px rgba(56, 176, 0, 0.2);
+}
+
+.game-card .quick-bet-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: -10px;
+  margin-bottom: 20px;
+}
+
+.game-card .quick-bet-buttons .ant-btn {
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  color: #2a7a00;
+  font-weight: 500;
+  padding: 0 15px;
+  height: 38px;
+  transition: all 0.2s ease;
+}
+
+.game-card .quick-bet-buttons .ant-btn:hover {
+  background-color: #f0f0f0;
+  color: #1e5a00;
+  border-color: #38b000;
+}
+
+.game-card .choice-section {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.game-card .choice-buttons-container {
+  width: 100%;
+  justify-content: space-around;
+  gap: 15px;
+}
+
+.game-card .choice-button {
+  flex: 1;
+  height: 55px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.1em;
+  border: 2px solid #e0e0e0;
+  color: #555;
+  background-color: #f7f7f7;
+  transition: all 0.3s ease;
+}
+
+.game-card .choice-button:hover {
+  border-color: #38b000;
+  color: #38b000;
+}
+
+.game-card .choice-button.ant-btn-primary {
+  background: linear-gradient(45deg, #38b000, #2a7a00);
+  border-color: #38b000;
+  color: white !important;
+  box-shadow: 0 4px 10px rgba(56, 176, 0, 0.3);
+}
+
+.game-card .flip-button {
+  height: 58px;
+  border-radius: 12px;
+  font-size: 1.3em;
+  font-weight: 700;
+  background: linear-gradient(90deg, #38b000, #1e5a00);
+  border: none;
+  box-shadow: 0 6px 15px rgba(56, 176, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.game-card .flip-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(56, 176, 0, 0.5);
+}
+
+.game-card .flip-button.ant-btn-loading {
+  opacity: 0.8;
+}
+
+.game-card .coin-display-area {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border: 1px dashed #dcdcdc;
+  border-radius: 12px;
+  background-color: #fcfcfc;
+  gap: 15px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.game-card .coin-placeholder-initial {
+  color: #888;
+  font-style: italic;
+  font-size: 0.95em;
+}
+
+.game-card .coin-animation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  perspective: 1000px;
+}
+
+.game-card .coin {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: relative;
+  transform-style: preserve-3d;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.8s ease-out;
+}
+
+.game-card .coin::before,
+.game-card .coin::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3em;
+  font-weight: bold;
+  color: white;
+  backface-visibility: hidden;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.game-card .coin::before {
+  content: 'H';
+  background: linear-gradient(45deg, #ffd700, #ffae00);
+  transform: rotateY(0deg);
+  border: 4px solid #cc8800;
+}
+
+.game-card .coin::after {
+  content: 'T';
+  background: linear-gradient(45deg, #c0c0c0, #a0a0a0);
+  transform: rotateY(180deg);
+  border: 4px solid #808080;
+}
+
+.game-card .coin.flipping {
+  animation: flip3D 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+}
+
+@keyframes flip3D {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(720deg);
+  }
+}
+
+.game-card .coin.static.heads {
+  transform: rotateY(0deg);
+}
+
+.game-card .coin.static.tails {
+  transform: rotateY(180deg);
+}
+
+.game-card .coin.flipping::before,
+.game-card .coin.flipping::after {
+  content: none;
+}
+
+.game-card .coin-result-display {
+  text-align: center;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.game-card .result-title {
+  margin: 0 !important;
+  font-weight: 700;
+  font-size: 1.5em !important;
+}
+
+.game-card .coin-result-display.win .result-title {
+  color: #38b000;
+}
+
+.game-card .coin-result-display.lose .result-title {
+  color: #dc3545;
+}
+
+.game-card .coin-result-display .anticon {
+  font-size: 1.2em;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.game-card .final-result-text span {
+  font-weight: 700;
+  color: #1e5a00;
+  font-size: 1.1em;
+}
+
+.game-card .recent-results-display {
+  margin-top: 25px;
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #f0f0f0;
+  font-size: 0.95em;
+  color: #555;
+}
+
+.game-card .recent-results-display .ant-space {
+  margin-top: 10px;
+}
+
+.game-card .recent-result-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 0.9em;
+  margin: 0 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.game-card .recent-result-item.win {
+  background-color: #d4edda;
+  color: #28a745;
+}
+
+.game-card .recent-result-item.lose {
+  background-color: #f8d7da;
+  color: #dc3545;
+}
+
+.game-card .game-info {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #f0f0f0;
+  color: #777;
+  font-size: 0.88em;
+  line-height: 1.4;
+}
+
+@media (max-width: 576px) {
+  .withdraw-card.game-card {
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .withdraw-card.game-card .card-title {
+    font-size: 1.5em !important;
+  }
+
+  .game-card .balance-display {
+    padding: 12px 15px;
+    font-size: 1em;
+  }
+
+  .game-card .balance-value {
+    font-size: 1.1em;
+  }
+
+  .game-card .quick-bet-buttons {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .game-card .choice-button {
+    height: 45px;
+    font-size: 1em;
+    border-radius: 10px;
+  }
+
+  .game-card .flip-button {
+    height: 50px;
+    font-size: 1.1em;
+    border-radius: 10px;
+  }
+
+  .game-card .coin {
+    width: 80px;
+    height: 80px;
+  }
+
+  .game-card .coin::before,
+  .game-card .coin::after {
+    font-size: 2.5em;
+  }
+
+  .game-card .result-title {
+    font-size: 1.3em !important;
+  }
+
+  .game-card .final-result-text {
+    font-size: 1em;
+  }
+}
+
+.ant-btn-primary {
+  background: linear-gradient(45deg, #38b000, #2a7a00) !important;
+  border-color: #38b000 !important;
+  color: white !important;
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+  background: linear-gradient(45deg, #44cc00, #329a00) !important;
+  border-color: #44cc00 !important;
+}
+
+.ant-btn-primary[disabled] {
+  background: #e0e0e0 !important;
+  border-color: #dcdcdc !important;
+  color: #a0a0a0 !important;
+  box-shadow: none !important;
+}
+
+.ant-form-item {
+  margin-bottom: 24px;
+}
