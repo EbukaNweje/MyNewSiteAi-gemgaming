@@ -4,6 +4,7 @@ import "../styles/dashboard.css";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Line } from '@ant-design/charts';
 import { Table, Card, Modal, Button as AntdButton } from 'antd';
+import axios from 'axios';
 
 const Dashboard = () => {
   const [showBalances, setShowBalances] = useState({
@@ -141,6 +142,12 @@ const Dashboard = () => {
   const getCardClassName = (title) => {
     return `wallet_balance ${title.toLowerCase().replace(/\s/g, '-')}-card`;
   };
+
+  // const url = 'https://api.example.com/userdata'; // Replace with your API endpoint
+
+  // const getUserData = async () => {
+  //   const response = await axios.get()
+  // }
 
   return (
     <div className='dashboard_body'>
