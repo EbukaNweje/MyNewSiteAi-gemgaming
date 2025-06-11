@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
-
 import 'swiper/css';
 import 'swiper/css/autoplay';
 import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
-
 import "../styles/hero.css";
-
 import HeroImg from "../assets/public/Hero-image.jpg";
 import HeroImg2 from "../assets/public/Hero-image3.png";
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
+    const navigate = useNavigate()
     const changingWords = [
         "Dominate the Blockchain.",
         "Own the Future.",
@@ -44,6 +43,10 @@ const Hero = () => {
         { img: HeroImg },
     ];
 
+    const handleLogin =()=>{
+        navigate("/login")
+    }
+
     return (
         <div className='hero_body'>
             <Swiper
@@ -73,7 +76,7 @@ const Hero = () => {
                                     </span>
                                 </h2>
                                 <h4>Step into the next generation of gaming where every win counts and your time is rewarded. Dive into thrilling gameplay, own your in-game assets as NFTs, and earn real crypto rewards with every mission.</h4>
-                                <button className="hero_cta_button">Play & Earn Now</button>
+                                <button className="hero_cta_button" onClick={handleLogin}>Play & Earn Now</button>
                             </div>
                         </div>
                     </SwiperSlide>

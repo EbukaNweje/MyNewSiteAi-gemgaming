@@ -1,35 +1,100 @@
+/* src/styles/login.css */
+
 .login-page-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #f5f3ff;
-  padding: 20px;
-  box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f3ff;
+    padding: 20px; /* Base padding for larger screens */
+    box-sizing: border-box;
 }
 
 .login-card {
-  max-width: 500px;
-  width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  padding: 13px;
+    max-width: 500px;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    padding: 30px; /* Increased padding for better desktop presentation */
 }
 
 .site-form-item-icon {
-  color: rgba(0, 0, 0, 0.25);
+    color: rgba(0, 0, 0, 0.25);
 }
 
 .ant-form-item-label > label {
-  font-weight: 600;
-  color: #333;
+    font-weight: 600;
+    color: #333;
+    font-size: 1em; /* Ensure base font size for labels */
 }
 
 .login-form-forgot,
 .login-page-container a {
-  color: #38b000;
+    color: #38b000;
+    font-size: 0.9em; /* Base font size for links */
 }
 
 .login-page-container a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
+}
+
+/* --- Responsive Adjustments with Media Queries --- */
+
+/* For screens smaller than 768px (e.g., tablets in portrait, large phones) */
+@media (max-width: 768px) {
+    .login-page-container {
+        padding: 15px; /* Slightly reduce padding on container */
+    }
+
+    .login-card {
+        padding: 25px; /* Slightly reduce padding inside the card */
+    }
+
+    .ant-form-item-label > label {
+        font-size: 0.95em; /* Slightly reduce label font size */
+    }
+
+    .login-form-forgot,
+    .login-page-container a {
+        font-size: 0.88em; /* Slightly reduce link font size */
+    }
+}
+
+/* For screens smaller than 576px (typical mobile phones) */
+@media (max-width: 576px) {
+    .login-page-container {
+        /* On very small screens, remove horizontal padding from container
+           to let the card go edge-to-edge if needed, but keep vertical padding */
+        padding: 20px 10px;
+        align-items: flex-start; /* Align to top to prevent keyboard pushing content */
+    }
+
+    .login-card {
+        border-radius: 8px; /* Slightly smaller border-radius */
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Lighter shadow */
+        padding: 20px; /* Further reduce padding inside the card for mobile */
+    }
+
+    .ant-form-item-label > label {
+        font-size: 0.9em; /* Further reduce label font size for mobile */
+    }
+
+    .login-form-forgot,
+    .login-page-container a {
+        font-size: 0.85em; /* Further reduce link font size for mobile */
+    }
+}
+
+/* For screens smaller than 400px (very small phones) */
+@media (max-width: 400px) {
+    .login-card {
+        padding: 15px; /* Even smaller padding for extremely small screens */
+    }
+    .ant-form-item-label > label {
+        font-size: 0.88em;
+    }
+    .login-form-forgot,
+    .login-page-container a {
+        font-size: 0.82em;
+    }
 }

@@ -1,103 +1,246 @@
+/* testimonies.css */
+
 .testimony_body {
     width: 100%;
-    padding: 50px 0; 
+    padding: 50px 0; /* Vertical padding for the whole section */
     background-color: #f8f8f8;
+    box-sizing: border-box; /* Include padding in the element's total width */
 }
 
 .testimony_wrapper {
-    max-width: 1200px; 
-    margin: 0 auto; 
-    padding: 0 20px; 
+    max-width: 1200px; /* Max width for the content area on large screens */
+    margin: 0 auto; /* Center the wrapper */
+    padding: 0 20px; /* Horizontal padding for the wrapper */
     text-align: center;
 }
 
 .testimony_header {
-    margin-bottom: 40px;
+    margin-bottom: 40px; /* Space below the header */
 }
 
 .testimony_header h2 {
-    font-size: 2em;
+    font-size: 2.8em; /* Large size for main heading */
     color: #333;
     margin-bottom: 10px;
 }
 
 .testimony_header h4 {
-    font-size: 1.2em;
+    font-size: 1.3em; /* Slightly smaller subheading */
     color: #666;
+    max-width: 800px; /* Increased max-width for "Trusted by..." line */
+    margin: 0 auto; /* Center the subheading */
+    line-height: 1.5;
 }
 
 .testimony_container {
-    width: 100%;
+    width: 100%; /* Ensure container takes full width */
 }
 
 .testimony_card {
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 10px;
-    padding: 30px;
+    padding: 30px; /* Internal padding of each card */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-    height: 250px;
+    height: 250px; /* Fixed height for consistent card appearance */
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* gap: 15p;  */
-    text-align: left; 
-    margin-bottom: 40px;
+    text-align: left; /* Text alignment within the card */
+    /* margin-bottom is not needed here as Swiper handles spacing */
 }
 
 .testimony_card h3 {
-    font-size: 1.4em;
+    font-size: 1.4em; /* Font size for username */
     color: #38b000;
-    margin-bottom: 15px;
+    margin-bottom: 15px; /* Space below username */
 }
 
 .testimony_card p {
-    font-size: 1em;
+    font-size: 1em; /* Font size for comment */
     color: #555;
     line-height: 1.6;
+    /* Ensure paragraph takes available space and handles overflow */
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Add ellipsis if text overflows */
+    /* white-space: nowrap; - Removed this, as it prevents text wrapping for long comments */
 }
 
-.swiper-container { 
-  padding-bottom: 50px; 
+/* --- Swiper Specific Styles (Adjustments for default Swiper classes) --- */
+
+/* The main Swiper wrapper, your .mySwiper or the default .swiper */
+.mySwiper {
+    padding-bottom: 50px; /* Space for pagination dots */
+    /* Important: Do NOT add horizontal padding here (padding-left, padding-right)
+       as Swiper calculates slide widths based on its own dimensions.
+       Use padding on .testimony_wrapper instead for outer spacing. */
+}
+
+/* Pagination dots */
+.swiper-pagination {
+    bottom: 0px !important; /* Adjust position if needed, !important to override Swiper defaults */
+    top: auto !important;
 }
 
 .swiper-pagination-bullet {
     background-color: #ccc;
     opacity: 1;
+    width: 10px;
+    height: 10px;
+    margin: 0 5px; /* Space between bullets */
 }
 
 .swiper-pagination-bullet-active {
-    background-color: #38b000; 
+    background-color: #38b000; /* Active bullet color */
+    transform: scale(1.2); /* Make active bullet slightly larger */
 }
 
+/* Navigation buttons (if you decide to use them in the future) */
+/* Since Navigation module is NOT imported in your JSX, these rules won't apply */
+/* but I'll keep them here for completeness if you change your mind */
 .swiper-button-next,
 .swiper-button-prev {
-    color: #38b000 ;
+    color: #38b000;
     top: 50%;
-    transform: translateY(-50%) ;
-    font-size: 1.5em 
+    transform: translateY(-50%);
+    font-size: 1.5em;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    opacity: 1;
 }
 
 .swiper-button-next:after,
 .swiper-button-prev:after {
-    font-size: 1.5em ; 
+    font-size: 1.5em;
 }
 
-@media (max-width: 600px) {
+/* --- Media Queries for Responsiveness --- */
+
+@media (max-width: 1024px) {
+    .testimony_wrapper {
+        padding: 0 15px; /* Slightly less horizontal padding */
+    }
+    .testimony_header h2 {
+        font-size: 2.5em;
+    }
+    .testimony_header h4 {
+        font-size: 1.1em;
+    }
+    .testimony_card {
+        padding: 25px; /* Slightly reduced card padding */
+    }
+    .mySwiper {
+        padding-bottom: 45px; /* Adjust padding for pagination */
+    }
+}
+
+@media (max-width: 768px) {
+    .testimony_body {
+        padding: 40px 0; /* Reduced vertical padding */
+    }
+    .testimony_wrapper {
+        padding: 0 10px; /* Further reduced horizontal padding */
+    }
+    .testimony_header {
+        margin-bottom: 30px;
+    }
+    .testimony_header h2 {
+        font-size: 2em;
+    }
+    .testimony_header h4 {
+        font-size: 1em;
+        max-width: 90%; /* Allow h4 to take more width */
+    }
+    .testimony_card {
+        height: 220px; /* Slightly shorter cards */
+        padding: 20px; /* Reduced padding inside card */
+    }
+    .testimony_card h3 {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+    .testimony_card p {
+        font-size: 0.95em;
+    }
+    .mySwiper {
+        padding-bottom: 40px;
+    }
+    .swiper-pagination-bullet {
+        width: 8px; /* Smaller pagination bullets */
+        height: 8px;
+        margin: 0 4px;
+    }
+    /* Hide navigation buttons on smaller screens (your existing rule) */
     .swiper-button-next,
     .swiper-button-prev {
-        display: none ;
+        display: none;
     }
 }
 
 @media (max-width: 640px) {
+    /* Your existing media query, aligning with Swiper's 640 breakpoint */
+    .testimony_header h2 {
+        font-size: 1.8em; /* Adjust from 2em of 768px */
+    }
+    .testimony_header h4 {
+        font-size: 0.95em; /* Adjust from 1em of 768px */
+        max-width: 95%;
+    }
     .testimony_card {
-        padding: 20px;
+        padding: 20px; /* Matches 768px breakpoint for consistency */
+        height: 200px; /* Further reduced height for smaller screens */
     }
     .testimony_card h3 {
-        font-size: 1.2em;
+        font-size: 1.1em;
+        margin-bottom: 8px;
     }
     .testimony_card p {
         font-size: 0.9em;
+    }
+    .mySwiper {
+        padding-bottom: 35px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .testimony_body {
+        padding: 25px 0;
+    }
+    .testimony_wrapper {
+        padding: 0 8px; /* Minimal horizontal padding */
+    }
+    .testimony_header {
+        margin-bottom: 20px;
+    }
+    .testimony_header h2 {
+        font-size: 1.5em;
+    }
+    .testimony_header h4 {
+        font-size: 0.8em;
+    }
+    .testimony_card {
+        height: 180px; /* Potentially shorter for more content to fit on screen */
+        padding: 15px;
+    }
+    .testimony_card h3 {
+        font-size: 1em;
+        margin-bottom: 8px;
+    }
+    .testimony_card p {
+        font-size: 0.8em;
+    }
+    .mySwiper {
+        padding-bottom: 30px;
+    }
+    .swiper-pagination-bullet {
+        width: 7px;
+        height: 7px;
+        margin: 0 3px;
     }
 }

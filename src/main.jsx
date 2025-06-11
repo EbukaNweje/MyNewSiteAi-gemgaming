@@ -5,11 +5,18 @@ import App from './App.jsx';
 import 'antd/dist/reset.css';
 import { App as AntdApp } from 'antd'; 
 import '@ant-design/v5-patch-for-react-19'
+import { persistor, store } from './global/Store.js';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AntdApp>
-      <App />
-    </AntdApp>
+    <Provider store={store}>
+      <AntdApp>
+          <PersistGate loading={null} persistor={persistor}>
+            <App />
+          </PersistGate>
+      </AntdApp>
+    </Provider>
   </StrictMode>,
 );

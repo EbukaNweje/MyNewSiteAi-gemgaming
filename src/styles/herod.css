@@ -1,25 +1,20 @@
-/* src/styles/herod.css */
 
-/* Base container styles */
 .herod_body {
     width: 100%;
     height: 85vh;
     display: flex;
     justify-content: center;
-    /* background-color: rgb(239, 128, 239); */
 }
 
-/* Wrapper for main content - will be animated */
 .h_wrapper {
     width: 90%;
     height: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center; /* Align items vertically in the center */
-    /* Initial state for animation */
+    align-items: center;
     opacity: 0;
-    transform: translateY(20px); /* Start slightly below final position */
-    transition: opacity 1s ease-out, transform 1s ease-out; /* Animation properties */
+    transform: translateY(20px); 
+    transition: opacity 1s ease-out, transform 1s ease-out; 
 }
 
 .h_wrapper.animate-in {

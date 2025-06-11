@@ -1,41 +1,82 @@
+/* src/styles/transactionHistory.css */
+
+/* Base Styles */
 .transaction-history-container {
     min-height: 100vh;
     width: 100%;
     background-color: #eff8ed;
-    padding: 20px;
+    padding: 20px; /* Base padding */
     box-sizing: border-box;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
 }
 
+/* Style for the main card/table wrapper */
 .transaction-card {
     width: 100%;
     max-width: 1200px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    padding: 15px;
+    padding: 15px; /* Base padding for the card wrapper */
     margin-top: 20px;
+    overflow-x: auto; /* Enable horizontal scrolling if it contains a table */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on touch devices */
 }
 
+/* If this transaction card contains an Ant Design Table, apply these styles */
+.transaction-card .ant-table-thead > tr > th {
+    background-color: #f0f0f0;
+    color: #333;
+    font-weight: 600;
+    white-space: nowrap;
+    padding: 12px 16px;
+    font-size: 0.9em; /* Reduced base font size for headers */
+}
+
+.transaction-card .ant-table-tbody > tr > td {
+    white-space: nowrap;
+    padding: 10px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.85em; /* Reduced base font size for cells */
+}
+
+/* Optional: Make first column sticky for better UX on scrollable tables */
+.transaction-card .ant-table-cell-fix-left {
+    position: sticky !important;
+    left: 0;
+    z-index: 1;
+    background-color: #fff;
+    border-right: 1px solid #f0f0f0;
+}
+
+
+/* Style for the Modal content */
 .transaction-details-modal-content {
     padding: 15px 0;
     line-height: 1.8;
+    font-size: 0.9em; /* Reduced base font size for modal text */
+    color: #333;
 }
 
 .transaction-details-modal-content p {
     margin-bottom: 8px;
 }
 
+/* Specific class for the modal close button */
 .modal-close-button {
+    /* No specific styles needed here, Ant Design handles it well */
 }
 
+/* Ant Design Overrides for consistent primary button styling across components */
 .ant-btn-primary {
     background: linear-gradient(45deg, #38b000, #2a7a00) !important;
     border-color: #38b000 !important;
     color: white !important;
+    font-size: 0.9em; /* Slightly reduced button font size */
 }
 
 .ant-btn-primary:hover,
@@ -51,6 +92,107 @@
     box-shadow: none !important;
 }
 
+/* Ensure form item margins are consistent (if any forms exist in this component) */
 .ant-form-item {
     margin-bottom: 24px;
+}
+
+/* --- Responsive Adjustments with Media Queries --- */
+
+/* Adjusting the main title font size (assuming you use Ant Design Typography e.g., Title level={3}) */
+.transaction-history-container .ant-typography.ant-typography-h3 { /* Target specifically Ant Design H3 */
+    font-size: 1.8em !important; /* Slightly reduced base font size for the title */
+    margin-bottom: 15px !important;
+}
+
+
+@media (max-width: 1024px) {
+    .transaction-history-container {
+        padding: 15px; /* Slightly reduced padding */
+    }
+    .transaction-card {
+        padding: 10px; /* Reduced padding for the card wrapper */
+    }
+
+    /* If it contains a table */
+    .transaction-card .ant-table-thead > tr > th,
+    .transaction-card .ant-table-tbody > tr > td {
+        padding: 10px 14px;
+        font-size: 0.9em; /* Further reduced font size for table text */
+    }
+    .transaction-details-modal-content {
+        font-size: 0.88em; /* Further reduced font size */
+    }
+    .transaction-history-container .ant-typography.ant-typography-h3 {
+        font-size: 1.6em !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .transaction-history-container {
+        padding: 10px; /* Reduced padding for tablets */
+    }
+    .transaction-card {
+        margin-top: 15px;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        padding: 8px; /* Further reduced padding for card wrapper */
+    }
+
+    /* If it contains a table */
+    .transaction-card .ant-table-thead > tr > th,
+    .transaction-card .ant-table-tbody > tr > td {
+        padding: 8px 10px;
+        font-size: 0.85em; /* Even smaller font for table text */
+    }
+    .transaction-card .ant-table-cell-fix-left {
+        min-width: 80px;
+    }
+    .transaction-details-modal-content {
+        font-size: 0.83em; /* Even smaller font */
+    }
+    .transaction-details-modal-content p {
+        margin-bottom: 6px;
+    }
+    .transaction-history-container .ant-typography.ant-typography-h3 {
+        font-size: 1.4em !important;
+    }
+    .ant-btn-primary {
+        font-size: 0.85em; /* Smaller button font size */
+        height: 32px; /* Slightly shorter button */
+    }
+}
+
+@media (max-width: 576px) {
+    .transaction-history-container {
+        padding: 5px; /* Minimal padding for small phones */
+        justify-content: flex-start;
+    }
+    .transaction-card {
+        margin-top: 10px;
+        border-radius: 4px;
+        padding: 5px; /* Minimal padding for card wrapper */
+    }
+
+    /* If it contains a table */
+    .transaction-card .ant-table-thead > tr > th,
+    .transaction-card .ant-table-tbody > tr > td {
+        padding: 6px 8px;
+        font-size: 0.8em; /* Smallest font for table cells */
+    }
+    .transaction-details-modal-content {
+        padding: 10px 0;
+        font-size: 0.8em; /* Smallest font for modal content */
+    }
+    .transaction-details-modal-content p {
+        margin-bottom: 5px;
+    }
+    .transaction-history-container .ant-typography.ant-typography-h3 {
+        font-size: 1.2em !important; /* Smallest title font size */
+        margin-bottom: 8px !important;
+    }
+    .ant-btn-primary {
+        font-size: 0.8em;
+        height: 30px;
+    }
 }

@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
-import "../styles/dashboardNav.css";
+import "../styles/dashboardNav.css"; // Ensure this path is correct
 import { FaHome } from "react-icons/fa";
-import { FaDatabase } from "react-icons/fa";
 import { BiSolidUserAccount } from "react-icons/bi";
 import { GiCash } from "react-icons/gi";
 import { GiPayMoney } from "react-icons/gi";
 import { HiOutlineClipboardDocument } from "react-icons/hi2";
 import { BiSolidBadgeCheck } from "react-icons/bi";
-import { BiSolidCategory } from "react-icons/bi";
-import { MdVideoLibrary } from "react-icons/md";
 import { AiFillSetting } from "react-icons/ai";
 import { IoClose, IoLogOut } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 import logo from "../assets/public/logo.png";
-import { Modal, Button } from 'antd'; // Make sure Button is imported
+import { Modal, Button } from 'antd';
+import { CgMenuRight } from "react-icons/cg";
 
 const DashboardNav = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   const showModal = () => {
@@ -32,38 +31,52 @@ const DashboardNav = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const navigateAndCloseMenu = (path) => {
+    navigate(path);
+    setIsMobileMenuOpen(false);
+  };
+
   const handleHomeClick = () => {
-    navigate("/dashboard");
+    navigateAndCloseMenu("/dashboard");
   }
-    const handleAssetsClick = () => {
-        navigate("/assets");
-    }
-    const handleProfileClick = () => {
-        navigate("/User-profile");
-    }
-    const handleDepositClick = () => {
-        navigate("/Deposit-History");
-    }
-    const handleHistoryClick = () => {
-        navigate("/transactions-history");
-    }
-    const handleWithdrawalsClick = () => {
-        navigate("/Withdrawal-History");
-    }
-    const handleVerifyAccountClick = () => {
-        navigate("/verify-account");
-    }
-    const handleSettingsClick = () => {
-        navigate("/settings");
-    }
+  const handleProfileClick = () => {
+    navigateAndCloseMenu("/User-profile");
+  }
+  const handleDepositClick = () => {
+    navigateAndCloseMenu("/Deposit-History");
+  }
+  const handleHistoryClick = () => {
+    navigateAndCloseMenu("/transactions-history");
+  }
+  const handleWithdrawalsClick = () => {
+    navigateAndCloseMenu("/Withdrawal-History");
+  }
+  const handleVerifyAccountClick = () => {
+    navigateAndCloseMenu("/verify-account");
+  }
+  const handleSettingsClick = () => {
+    navigateAndCloseMenu("/settings");
+  }
+
+  const handleLogoutClick = () => {
+    showModal();
+    setIsMobileMenuOpen(false);
+  };
 
   return (
-    <div className='sidebar_body'>
+    <div className={`sidebar_body ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
       <div className="sidebar_wrapper">
         <div className="sidebar_header">
           <div className="sidebar_dashboard_logo">
             <img src={logo} alt="Logo" />
           </div>
+          {/* Moved close button here, outside sidebar_dashboard_logo */}
+          <IoClose className='mobile_close_icon' onClick={toggleMobileMenu} />
         </div>
 
         <div className="dashboard_content">
@@ -71,21 +84,17 @@ const DashboardNav = () => {
             <FaHome className='sidebar_icon'/>
             <h4>Dashboard</h4>
           </div>
-          {/* <div className="d_content_card">
-            <FaDatabase className='sidebar_icon'/>
-            <h4>Assets</h4>
-          </div> */}
           <div className="d_content_card" onClick={handleProfileClick}>
             <BiSolidUserAccount className='sidebar_icon'/>
             <h4>Profile</h4>
           </div>
           <div className="d_content_card" onClick={handleDepositClick}>
             <GiPayMoney className='sidebar_icon'/>
-            <h4>Deposit</h4>
+            <h4>Deposit History</h4>
           </div>
           <div className="d_content_card" onClick={handleWithdrawalsClick}>
             <GiCash className='sidebar_icon'/>
-            <h4>Withdrawals</h4>
+            <h4>Withdrawal History</h4>
           </div>
           <div className="d_content_card" onClick={handleHistoryClick}>
             <HiOutlineClipboardDocument className='sidebar_icon'/>
@@ -102,7 +111,7 @@ const DashboardNav = () => {
             <AiFillSetting className='sidebar_icon'/>
             <h4>Settings</h4>
           </div>
-          <div className="d_content_card" onClick={showModal}>
+          <div className="d_content_card" onClick={handleLogoutClick}>
             <IoLogOut className='sidebar_icon'/>
             <h4>Logout</h4>
           </div>
@@ -124,9 +133,9 @@ const DashboardNav = () => {
           </Button>,
           <Button
             key="submit"
-            type="primary" 
+            type="primary"
             onClick={handleOk}
-            style={{ backgroundColor: 'purple', borderColor: 'purple' }} //
+            style={{ backgroundColor: 'purple', borderColor: 'purple' }}
           >
             Yes, Log Out
           </Button>,
@@ -134,6 +143,10 @@ const DashboardNav = () => {
       >
         <p>Are you sure you want to log out?</p>
       </Modal>
+
+      <div className="mobile_menu_toggle">
+        <CgMenuRight className='menu_icon' onClick={toggleMobileMenu} />
+      </div>
     </div>
   );
 };
