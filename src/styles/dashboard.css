@@ -1,17 +1,19 @@
-/* Existing styles (unchanged parts) */
+/* src/styles/dashboard.css */
+
 .dashboard_body {
     width: 100%;
     min-height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     background-color: #f5f3ff;
-    padding: 2rem 0;
+    padding: 2rem;
     box-sizing: border-box;
 }
 
 .dashboard_wrapper {
-    width: 95%;
+    width: 100%;
     max-width: 1200px;
     display: flex;
     flex-direction: column;
@@ -28,7 +30,7 @@
 }
 
 .wallet_balance {
-    flex: 1;
+    flex: 1 1 calc(33.33% - 14px);
     background-color: #38b000;
     border-radius: 10px;
     padding: 1rem;
@@ -116,24 +118,30 @@
     overflow: hidden;
 }
 
-/* New: Container for action buttons to manage spacing */
 .crypto-action-buttons-container {
     display: flex;
-    gap: 8px; /* A little gap between buttons */
-    justify-content: center; /* Center buttons within their cell if needed */
-    flex-wrap: wrap; /* Allow buttons to wrap to the next line if space is very limited */
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
 }
 
 .crypto-action-btn {
     color: white;
     border: none;
-    padding: 6px 12px; 
+    width: 80px;
+    height: 30px;
+    padding: 0;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 14px; 
+    font-size: 14px;
     transition: background-color 0.2s ease-in-out;
-    flex-shrink: 0; /* Prevent buttons from shrinking below their content size */
-    margin: 0;
+    flex-shrink: 0;
+    text-align: center;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .deposit-btn {
@@ -174,13 +182,14 @@
 .ant-form-item {
     margin-bottom: 24px;
 }
-@media (max-width: 768px) {
+
+@media (max-width: 840px) {
     .dashboard_body {
-        padding: 1.5rem 0.5rem;
+        padding: 1.5rem 1rem;
     }
 
     .dashboard_wrapper {
-        width: 98%;
+        width: 100%;
         gap: 15px;
     }
 
@@ -192,6 +201,9 @@
     .wallet_balance {
         min-width: unset;
         width: 100%;
+        flex: unset;
+        max-width: unset;
+        padding: 0.8rem;
     }
 
     .balance_wrapper h4 {
@@ -223,12 +235,45 @@
     }
 
     .crypto-action-btn {
-        padding: 5px 10px;
-        font-size: 12px;
+        width: 70px;
+        height: 28px;
+        font-size: 11px;
     }
 
     .crypto-action-buttons-container {
         gap: 6px;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard_body {
+        padding: 1rem 0.5rem;
+    }
+
+    .balance_wrapper h4 {
+        font-size: 16px;
+    }
+
+    .wallet_amount {
+        font-size: 22px;
+    }
+    
+    .chart_header h4 {
+        font-size: 18px;
+    }
+
+    .chart_header p {
+        font-size: 14px;
+    }
+
+    .chart_body {
+        height: 250px;
+    }
+
+    .table_header h4 {
+        font-size: 18px;
     }
 }
 
@@ -238,7 +283,6 @@
     }
 
     .dashboard_wrapper {
-        width: 100%;
         gap: 10px;
     }
 
@@ -288,10 +332,65 @@
     }
 
     .crypto-action-btn {
-        padding: 4px 8px; 
-        font-size: 10px; 
+        width: 60px;
+        height: 25px;
+        font-size: 10px;
     }
+
     .crypto-action-buttons-container {
-        gap: 10px;
+        flex-direction: column;
+        gap: 8px;
+        justify-content: center;
+        flex-wrap: nowrap;
+    }
+}
+
+@media (max-width: 390px) {
+    .dashboard_body {
+        padding: 0.5rem 0.2rem;
+    }
+
+    .dashboard_wrapper {
+        gap: 8px;
+    }
+
+    .wallet_balance {
+        padding: 0.6rem;
+    }
+
+    .balance_wrapper h4 {
+        font-size: 13px;
+    }
+
+    .wallet_amount {
+        font-size: 18px;
+        gap: 6px;
+    }
+
+    .wallet_footer p {
+        font-size: 11px;
+    }
+
+    .transaction_chart,
+    .transaction_table {
+        padding: 0.6rem;
+    }
+
+    .chart_body {
+        height: 180px;
+    }
+
+    .table_header h4 {
+        font-size: 15px;
+    }
+
+    .crypto-action-btn {
+        width: 55px;
+        height: 22px;
+        font-size: 9px;
+    }
+
+    .crypto-action-buttons-container {
+        gap: 6px;
     }
 }

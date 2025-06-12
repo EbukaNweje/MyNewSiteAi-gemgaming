@@ -1,161 +1,290 @@
-.sidebar_body{
-    width: 20%;
+/* src/styles/dashboardNav.css */
+
+.sidebar_body {
+    width: 20%; /* Desktop default width */
     height: 100vh;
-    background: linear-gradient(#38b000, #2a7a00); /* Changed the second color of the gradient */
+    background: linear-gradient(#38b000, #2a7a00);
     display: flex;
-    justify-content: center;
-    align-items: center;
-    position: sticky;
+    flex-direction: column;
+    position: sticky; /* Keep it sticky/fixed on left */
     top: 0;
-    left: 0px;
+    left: 0;
+    z-index: 999;
+    box-sizing: border-box;
+    transition: width 0.3s ease-in-out, transform 0.3s ease-in-out; /* Add width to transition */
+    overflow-y: auto;
 }
-.sidebar_wrapper{
+
+.sidebar_wrapper {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
-.sidebar_header{
-    width: 80%;
+
+.sidebar_header {
+    width: 100%;
     height: 15%;
     display: flex;
-    padding: 10px;
+    padding: 10px 20px;
     align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
 }
-.sidebar_dashboard_logo{
-    width:60%;
-    height: 60%;
-}
-.sidebar_dashboard_logo img{
-    width: 100%;
+
+.sidebar_dashboard_logo {
+    width: auto;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar_dashboard_logo img {
+    max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
 }
-.dashboard_content{
+
+.mobile_close_icon {
+    display: none;
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+}
+
+.dashboard_content {
     margin-top: 10px;
     width: 100%;
     height: 65%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    flex-grow: 1;
 }
-.d_content_card{
-    width: 100%;
+
+.d_content_card {
+    width: 90%;
     height: 50px;
-    padding: 10px;
+    padding: 10px 20px;
     display: flex;
     align-items: center;
     gap: 10px;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease, width 0.2s ease, border-radius 0.2s ease, padding 0.2s ease, justify-content 0.2s ease; /* Add properties to transition */
+    margin: 0 auto;
 }
-.sidebar_icon{
+
+.sidebar_icon {
     font-size: 25px;
     color: white;
 }
-.d_content_card h4{
+
+.d_content_card h4 {
     color: #FFF;
-    font-family: "Poppins",sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
     line-height: 24px;
+    margin: 0;
+    white-space: nowrap;
+    transition: opacity 0.2s ease; /* Add transition for text visibility */
 }
-.d_content_card:hover{
+
+.d_content_card:hover {
     background-color: #6cd900;
-    width: 90%;
+    width: 95%;
     border-radius: 10px;
     cursor: pointer;
 }
-.logout_modal_overlay {
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5); 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    top: 0;
-    left: 0;
-}
- 
-.logout_modal_content {
-    background-color: white;
-    width: 35%;
-    height: 30%;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 5;
-}
-.logout_modal_content h2{
-    color: var(--Colors-Secondary-500, #07232F);
-    text-align: center;
-    font-family: "Poppins",sans-serif;
-    font-size: 19.799px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 29.699px;
-}
-.logout_modal_content h4{
-    color: var(--Colors-Neutral-500, #A4A4A4);
-    text-align: center;
-    font-family: "Poppins",sans-serif;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 18px; 
-}
-.logout_modal_actions{
-    width: 80%;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-.modal_cta{
-    width: 80px;
-    height: 30px;
-    border: 1.5px solid #38b000;
-    border-radius: 8px;
-    color: #38b000;
-    cursor: pointer;
-}
-.modal_accept{
-    width: 80px;
-    height: 30px;
-    border:none;
-    border-radius: 8px;
-    color: white;
-    background-color: #38b000;
-    cursor: pointer;
-}
- 
-@keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-}
- 
-.sidebar_footer{
+
+.sidebar_footer {
     width: 100%;
     height: 20%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 10px 0;
+    box-sizing: border-box;
+    margin-top: auto;
 }
-@media (max-width: 840px){
-    .sidebar_body{
+
+.mobile_menu_toggle {
+    display: none;
+}
+
+/* ------------------------------------------- */
+/* NEW: Tablet (Icon-Only Sidebar) Layout */
+/* This applies to screens roughly between large phones/small tablets and larger desktops */
+@media (min-width: 841px) and (max-width: 1024px) { /* Adjust 1024px to your desktop start if different */
+    .sidebar_body {
+        width: 70px; /* Narrow width for icon-only */
+        align-items: center; /* Center content horizontally */
+        padding: 0; /* Remove side padding */
+    }
+
+    .sidebar_header {
+        padding: 10px 0; /* Center logo */
+        justify-content: center;
+    }
+
+    .sidebar_dashboard_logo img {
+        max-width: 80%; /* Shrink logo for narrower space */
+        height: auto;
+    }
+
+    .d_content_card {
+        width: 100%; /* Make card full width of narrow sidebar */
+        padding: 10px 0; /* No side padding for card content */
+        justify-content: center; /* Center the icon */
+        gap: 0; /* Remove gap */
+        margin: 0; /* Remove auto margins */
+        height: 60px; /* Adjust height for icon spacing */
+    }
+
+    .d_content_card h4 {
+        display: none; /* HIDE THE TEXT LABEL */
+        opacity: 0; /* Ensure it fades out gracefully */
+    }
+
+    .sidebar_icon {
+        font-size: 28px; /* Slightly larger icon for prominence */
+    }
+
+    .d_content_card:hover {
+        width: 100%; /* Keep full width on hover */
+        border-radius: 0; /* No rounded corners on hover for full width */
+        background-color: #6cd900; /* Maintain hover color */
+    }
+
+    /* Hide any text in the footer if present and undesired in icon-only view */
+    .sidebar_footer {
+        padding: 10px 0;
+    }
+    .sidebar_footer h4, .sidebar_footer p, .sidebar_footer span { /* Adjust selectors as needed */
         display: none;
+    }
+}
+/* ------------------------------------------- */
+
+
+/* Existing Mobile (Top Bar) Media Query */
+/* This applies to screens 840px and below */
+@media (max-width: 800px) {
+    .sidebar_body {
+        width: 100%;
+        height: 70px;
+        position: fixed; /* Becomes a top bar */
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        background: linear-gradient(#38b000, #2a7a00);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        transform: translateX(0); /* Ensure it's visible */
+        justify-content: flex-end; /* Align mobile toggle to the right */
+        align-items: center;
+        flex-direction: row; /* Horizontal for top bar */
+        overflow-y: hidden; /* No vertical scroll for top bar */
+    }
+
+    .sidebar_wrapper {
+        display: none; /* Hide the main navigation content by default */
+    }
+
+    /* Styles for when the mobile menu is explicitly opened */
+    .sidebar_body.mobile-open {
+        transform: translateX(0);
+        width: 280px;
+        height: 100vh;
+        left: auto;
+        right: 0; /* Swings in from the right */
+        position: fixed;
+        top: 0;
+        box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2);
+        display: flex; /* Re-display wrapper */
+        flex-direction: column; /* Vertical again when open */
+        justify-content: space-between;
+        padding: 20px 0;
+        overflow-y: auto; /* Allow scrolling for opened menu */
+    }
+
+    .sidebar_body.mobile-open .sidebar_wrapper {
+        display: flex; /* Show the content when menu is open */
+    }
+
+    .sidebar_body.mobile-open .sidebar_header {
+        position: relative;
+        justify-content: flex-start;
+        padding-right: 50px;
+    }
+
+    .sidebar_body.mobile-open .sidebar_dashboard_logo {
+        justify-content: flex-start;
+        width: auto;
+    }
+
+    .sidebar_body.mobile-open .mobile_close_icon {
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        margin-left: 0;
+    }
+
+    .sidebar_body.mobile-open .mobile_menu_toggle {
+        display: none; /* Hide the hamburger icon when menu is open */
+    }
+
+    .mobile_menu_toggle {
+        display: flex; /* Show the hamburger icon */
+        font-size: 30px;
+        color: white;
+        margin-right: 20px;
+        cursor: pointer;
+    }
+
+    .sidebar_body.mobile-open .d_content_card {
+        width: 100%;
+        padding: 10px 20px;
+        margin: 0;
+        justify-content: flex-start; /* Align content to the left when open */
+    }
+
+    .sidebar_body.mobile-open .d_content_card:hover {
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .d_content_card h4 { /* Ensure text is visible in the opened mobile menu */
+        display: block;
+        opacity: 1;
+    }
+    .sidebar_footer h4, .sidebar_footer p, .sidebar_footer span { /* Ensure footer text is visible in opened mobile menu */
+        display: block;
+    }
+}
+
+/* Small Mobile Phones */
+@media (max-width: 480px) {
+    .sidebar_body.mobile-open {
+        width: 260px;
+    }
+    .mobile_menu_toggle {
+        font-size: 28px;
+        margin-right: 15px;
+    }
+    .mobile_close_icon {
+        font-size: 26px;
+        top: 15px;
+        right: 15px;
+    }
+    .sidebar_dashboard_logo img {
+        height: 35px;
+    }
+    .d_content_card h4 {
+        font-size: 15px;
+    }
+    .sidebar_icon {
+        font-size: 22px;
     }
 }

@@ -1,7 +1,7 @@
 /* src/styles/settings.css */
 
 .settings-page-container {
-    padding: 40px 20px;
+    padding: 40px 20px; /* Base padding */
     background-color: #f0f2f5;
     min-height: 100vh;
     display: flex;
@@ -17,7 +17,7 @@
     border-radius: 12px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
     padding: 0;
-    overflow: hidden;
+    overflow: hidden; /* Ensures content within tabs doesn't overflow */
 }
 
 .settings-page-title {
@@ -26,6 +26,7 @@
     padding: 30px 20px 20px;
     margin-bottom: 0 !important;
     border-bottom: 1px solid #f0f0f0;
+    font-size: 2.2em; /* Base font size for page title */
 }
 
 .settings-tabs .ant-tabs-nav {
@@ -36,7 +37,7 @@
 
 .settings-tabs .ant-tabs-tab {
     padding: 12px 16px;
-    font-size: 16px;
+    font-size: 1em; /* Base font size for tabs (from 16px) */
 }
 
 .settings-tabs .ant-tabs-tab-active {
@@ -55,14 +56,14 @@
 }
 
 .settings-tabs .ant-tabs-content-holder {
-    padding: 0 24px 24px;
+    padding: 0 24px 24px; /* Base padding for tab content */
 }
 
 .settings-section-card {
     margin-bottom: 24px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    padding: 20px;
+    padding: 20px; /* Base padding for section cards */
 }
 
 .settings-section-card .ant-card-head {
@@ -71,23 +72,37 @@
     padding-bottom: 10px;
 }
 
+.settings-section-card .ant-card-head-title { /* Added for section card titles */
+    font-size: 1.3em; /* Base font size for section titles */
+    color: #333;
+    font-weight: 600;
+}
+
 .settings-section-card .ant-card-body {
     padding: 0;
 }
 
 .settings-section-card .ant-form-item {
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Reduced form item margin */
 }
 
 .settings-section-card .ant-form-item-label > label {
     color: #555;
     font-weight: 500;
+    font-size: 0.9em; /* Reduced font size for form labels */
+}
+
+/* Ant Design input fields and select within settings sections */
+.settings-section-card .ant-input-affix-wrapper .ant-input,
+.settings-section-card .ant-select-selector {
+    font-size: 0.9em; /* Reduced font size for input/select text */
 }
 
 .settings-section-card .ant-input-affix-wrapper,
 .settings-section-card .ant-select-selector,
 .settings-section-card .ant-btn {
     border-radius: 8px;
+    font-size: 0.95em; /* Slightly reduced button font size */
 }
 
 .notification-item {
@@ -96,6 +111,7 @@
     align-items: center;
     padding: 12px 0;
     border-bottom: 1px solid #f0f0f0;
+    font-size: 0.9em; /* Reduced font size for notification text */
 }
 
 .notification-item:last-child {
@@ -107,33 +123,191 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    font-size: 0.9em; /* Reduced font size for 2FA text */
 }
 
 .verification-status-text {
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: 1em; 
 }
+
+.ant-btn-primary {
+    background: linear-gradient(45deg, #38b000, #2a7a00) !important;
+    border-color: #38b000 !important;
+    color: white !important;
+    font-size: 0.95em; 
+    height: 36px;
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+    background: linear-gradient(45deg, #44cc00, #329a00) !important;
+    border-color: #44cc00 !important;
+}
+
+.ant-btn-primary[disabled] {
+    background: #e0e0e0 !important;
+    border-color: #dcdcdc !important;
+    color: #a0a0a0 !important;
+    box-shadow: none !important;
+}
+
+
+@media (max-width: 1024px) {
+    .settings-page-container {
+        padding: 30px 15px; 
+    }
+    .settings-page-title {
+        font-size: 2em; 
+        padding: 25px 15px 15px;
+    }
+    .settings-tabs .ant-tabs-tab {
+        font-size: 0.95em; 
+        padding: 10px 14px;
+    }
+    .settings-tabs .ant-tabs-content-holder {
+        padding: 0 20px 20px;
+    }
+    .settings-section-card {
+        padding: 18px;
+    }
+    .settings-section-card .ant-card-head-title {
+        font-size: 1.25em;
+    }
+    .settings-section-card .ant-form-item-label > label {
+        font-size: 0.88em;
+    }
+    .settings-section-card .ant-input-affix-wrapper .ant-input,
+    .settings-section-card .ant-select-selector,
+    .settings-section-card .ant-btn {
+        font-size: 0.9em;
+    }
+    .notification-item,
+    .two-factor-switch-container {
+        font-size: 0.88em;
+    }
+    .verification-status-text {
+        font-size: 0.95em;
+    }
+    .ant-btn-primary {
+        font-size: 0.9em;
+        height: 34px;
+    }
+}
+
 
 @media (max-width: 768px) {
     .settings-page-container {
         padding: 20px 10px;
     }
-
     .settings-main-card {
-        border-radius: 0;
-        box-shadow: none;
+        border-radius: 0; 
+        box-shadow: none; 
     }
-
+    .settings-page-title {
+        font-size: 1.8em; 
+        padding: 20px 10px 10px;
+    }
     .settings-tabs .ant-tabs-nav {
         padding: 0 10px;
+        margin-bottom: 15px;
     }
-
     .settings-tabs .ant-tabs-tab {
-        font-size: 14px;
-        padding: 10px 12px;
+        font-size: 0.9em; 
+        padding: 8px 10px;
     }
-
     .settings-tabs .ant-tabs-content-holder {
-        padding: 0 15px 15px;
+        padding: 0 15px 15px; 
+    }
+    .settings-section-card {
+        margin-bottom: 15px;
+        padding: 15px;
+    }
+    .settings-section-card .ant-card-head-title {
+        font-size: 1.2em;
+    }
+    .settings-section-card .ant-form-item {
+        margin-bottom: 15px;
+    }
+    .settings-section-card .ant-form-item-label > label {
+        font-size: 0.85em; 
+    }
+    .settings-section-card .ant-input-affix-wrapper .ant-input,
+    .settings-section-card .ant-select-selector,
+    .settings-section-card .ant-btn {
+        font-size: 0.88em;
+    }
+    .notification-item,
+    .two-factor-switch-container {
+        font-size: 0.85em;
+        padding: 10px 0;
+    }
+    .verification-status-text {
+        font-size: 0.9em;
+    }
+    .ant-btn-primary {
+        font-size: 0.88em;
+        height: 32px;
+    }
+}
+
+@media (max-width: 576px) {
+    .settings-page-container {
+        padding: 10px 5px; /* Minimal padding for small phones */
+    }
+    .settings-page-title {
+        font-size: 1.5em; /* Smallest page title */
+        padding: 15px 5px 8px;
+    }
+    .settings-tabs .ant-tabs-nav {
+        padding: 0 5px;
+        margin-bottom: 10px;
+        /* Consider making tabs scrollable if too many for small screen */
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap; /* Keep tabs on one line */
+    }
+    .settings-tabs .ant-tabs-tab {
+        font-size: 0.85em; /* Smallest tab text */
+        padding: 6px 8px;
+    }
+    .settings-tabs .ant-tabs-content-holder {
+        padding: 0 10px 10px;
+    }
+    .settings-section-card {
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+    .settings-section-card .ant-card-head-title {
+        font-size: 1.1em;
+    }
+    .settings-section-card .ant-form-item {
+        margin-bottom: 10px;
+    }
+    .settings-section-card .ant-form-item-label > label {
+        font-size: 0.8em; /* Smallest labels */
+    }
+    .settings-section-card .ant-input-affix-wrapper .ant-input,
+    .settings-section-card .ant-select-selector,
+    .settings-section-card .ant-btn {
+        font-size: 0.85em;
+    }
+    .notification-item,
+    .two-factor-switch-container {
+        font-size: 0.8em;
+        flex-direction: column; /* Stack content in notification/2FA items */
+        align-items: flex-start;
+        padding: 8px 0;
+    }
+    .two-factor-switch-container .ant-switch { /* Adjust switch size if needed */
+        margin-top: 5px;
+    }
+    .verification-status-text {
+        font-size: 0.85em;
+        margin-top: 5px;
+    }
+    .ant-btn-primary {
+        font-size: 0.85em;
+        height: 30px;
     }
 }

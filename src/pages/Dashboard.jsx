@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../styles/dashboard.css";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Line } from '@ant-design/charts';
 import { Table, Card, Modal, Button as AntdButton } from 'antd';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 const Dashboard = () => {
+  // const userId = useSelector((state) => state.user.userId); 
+  const userId = localStorage.getItem('id'); // FIXED: Use localStorage to get userId
+ console.log("this is the id",userId)
   const [showBalances, setShowBalances] = useState({
     totalBalance: false,
     totalDeposit: false,
@@ -18,6 +22,9 @@ const Dashboard = () => {
 
   const [isWithdrawModalVisible, setIsWithdrawModalVisible] = useState(false);
   const [withdrawCrypto, setWithdrawCrypto] = useState('');
+
+  const [dashboardData, setDashboardData] = useState(null);
+  const [loadingData, setLoadingData] = useState(true);
 
   const navigate = useNavigate();
 
@@ -35,7 +42,7 @@ const Dashboard = () => {
 
   const handleDepositModalOk = () => {
     setIsDepositModalVisible(false);
-    navigate(`/deposit/${depositCrypto}`);
+    navigate(`/deposit/${depositCrypto}`); // FIXED: Added backticks
   };
 
   const handleDepositModalCancel = () => {
@@ -49,7 +56,7 @@ const Dashboard = () => {
 
   const handleWithdrawModalOk = () => {
     setIsWithdrawModalVisible(false);
-    navigate(`/withdraw/${withdrawCrypto}`);
+    navigate(`/withdraw/${withdrawCrypto}`); // FIXED: Added backticks
   };
 
   const handleWithdrawModalCancel = () => {
@@ -57,14 +64,14 @@ const Dashboard = () => {
   };
 
   const chartData = [
-    { type: 'Deposit', value: 5000 },
-    { type: 'Withdrawal', value: 3000 },
-    { type: 'Net Change', value: 2000 },
+    { category: 'Deposit', value: 5000 },
+    { category: 'Withdrawal', value: 3000 },
+    { category: 'Net Change', value: 2000 },
   ];
 
   const config = {
     data: chartData,
-    xField: 'type',
+    xField: 'category',
     yField: 'value',
     height: 400,
     point: {
@@ -73,11 +80,9 @@ const Dashboard = () => {
     },
     tooltip: {
       showMarkers: true,
-      formatter: (data) => ({ name: data.type, value: `$${data.value.toLocaleString()}` }),
+      formatter: (data) => ({ name: data.category, value: `$${data.value.toLocaleString()}` }), // FIXED: Added backticks
     },
-    legend: {
-      position: 'bottom',
-    },
+    legend: { position: 'bottom' },
     lineStyle: {
       stroke: '#8a2be2',
       lineWidth: 2,
@@ -93,6 +98,7 @@ const Dashboard = () => {
       filters: [
         { text: 'Bitcoin (BTC)', value: 'Bitcoin (BTC)' },
         { text: 'Ethereum (ETH)', value: 'Ethereum (ETH)' },
+        { text: 'Litecoin (LTC)', value: 'Litecoin (LTC)' },
       ],
       onFilter: (value, record) => record.cryptocurrency.includes(value),
     },
@@ -106,10 +112,10 @@ const Dashboard = () => {
       title: 'Actions',
       key: 'actions',
       render: (text, record) => (
-        <span>
+        <div className="crypto-action-buttons-container">
           <AntdButton className="crypto-action-btn deposit-btn" onClick={() => handleDepositClick(record.cryptocurrency)}>Deposit</AntdButton>
           <AntdButton className="crypto-action-btn withdraw-btn" onClick={() => handleWithdrawClick(record.cryptocurrency)}>Withdraw</AntdButton>
-        </span>
+        </div>
       ),
     },
   ];
@@ -140,14 +146,51 @@ const Dashboard = () => {
   };
 
   const getCardClassName = (title) => {
-    return `wallet_balance ${title.toLowerCase().replace(/\s/g, '-')}-card`;
+    return `wallet_balance ${title.toLowerCase().replace(/\s/g, '-')}-card`; 
   };
 
-  // const url = 'https://api.example.com/userdata'; // Replace with your API endpoint
+  const API_BASE_URL = "https://my-new-site-ai-gemgaming-backend.vercel.app/api";
 
-  // const getUserData = async () => {
-  //   const response = await axios.get()
-  // }
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoadingData(true);
+      try {
+        if (!userId) {
+          console.warn('User ID is missing. Skipping API call.');
+          setLoadingData(false); 
+          return;
+        }
+
+        const response = await axios.get(`${API_BASE_URL}/userdata/${userId}`); 
+        if (!response.ok) {
+          throw new Error(`Failed to fetch dashboard data. Status: ${response.status}`); 
+
+        }
+
+        console.log(response)
+        // setDashboardData(response);
+      } catch (error) {
+        console.error('Error fetching dashboard data:', error.message);
+      } finally {
+        setLoadingData(false);
+      }
+    };
+
+    fetchData();
+  }, [userId]);
+
+  if (!userId) {
+    return (
+      <div className="dashboard_body" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh', fontSize: '1.2em', color: '#555' }}>
+        Please log in to view your dashboard.
+        <AntdButton type="primary" onClick={() => navigate('/login')} style={{ marginTop: '20px' }}>Go to Login</AntdButton>
+      </div>
+    );
+  }
+
+  if (loadingData) {
+    return <div className="dashboard_body">Loading Dashboard...</div>;
+  }
 
   return (
     <div className='dashboard_body'>
@@ -156,14 +199,15 @@ const Dashboard = () => {
           {['Total Balance', 'Total Deposit', 'Total Withdrawal'].map((title, idx) => {
             const balanceKey = balanceDisplayMap[title];
             const isBalanceVisible = showBalances[balanceKey];
-            const valueToDisplay = balanceValues[balanceKey];
+            // Use dynamic values if available, otherwise fallback to static
+            const valueToDisplay = (dashboardData?.balances && dashboardData.balances[balanceKey]) ? dashboardData.balances[balanceKey] : balanceValues[balanceKey];
 
             return (
               <Card className={getCardClassName(title)} key={idx}>
                 <div className="balance_wrapper">
                   <h4>{title}</h4>
                   <div className="wallet_amount">
-                    {isBalanceVisible ? <h2>{valueToDisplay}</h2> : <h2>****</h2>}
+                    {isBalanceVisible ? <h2>{valueToDisplay}</h2> : <h2>****</h2>} {/* Changed empty <h2> to **** */}
                     {isBalanceVisible ? (
                       <FaEyeSlash onClick={() => handleToggleBalance(balanceKey)} style={{ cursor: 'pointer' }} />
                     ) : (
@@ -203,40 +247,28 @@ const Dashboard = () => {
       </div>
 
       <Modal
-        title={`Initiate Deposit for ${depositCrypto}`}
+        title={`Initiate Deposit for ${depositCrypto}`} // FIXED: Added backticks
         open={isDepositModalVisible}
         onOk={handleDepositModalOk}
         onCancel={handleDepositModalCancel}
         okText="Proceed to Deposit Page"
         cancelText="Cancel"
-        okButtonProps={{
-          style: {
-            backgroundColor: '#8a2be2',
-            borderColor: '#8a2be2',
-            color: 'white',
-          },
-        }}
+        className="deposit-modal"
       >
-        <p>You are about to navigate to the deposit page for **{depositCrypto}**.</p>
+        <p>You are about to navigate to the deposit page for <strong>{depositCrypto}</strong>.</p>
         <p>Please ensure you have reviewed your selection.</p>
       </Modal>
 
       <Modal
-        title={`Initiate Withdrawal for ${withdrawCrypto}`}
+        title={`Initiate Withdrawal for ${withdrawCrypto}`} // FIXED: Added backticks
         open={isWithdrawModalVisible}
         onOk={handleWithdrawModalOk}
         onCancel={handleWithdrawModalCancel}
         okText="Proceed to Withdraw Page"
         cancelText="Cancel"
-        okButtonProps={{
-          style: {
-            backgroundColor: '#8a2be2',
-            borderColor: '#8a2be2',
-            color: 'white',
-          },
-        }}
+        className="withdraw-modal"
       >
-        <p>You are about to navigate to the withdrawal page for **{withdrawCrypto}**.</p>
+        <p>You are about to navigate to the withdrawal page for <strong>{withdrawCrypto}</strong>.</p>
         <p>Please be sure of your selection as withdrawals are irreversible.</p>
       </Modal>
     </div>

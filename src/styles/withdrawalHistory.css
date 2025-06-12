@@ -1,8 +1,11 @@
+/* src/styles/withdrawalHistory.css */
+
+/* Base Styles */
 .withdrawal-history-container {
     min-height: 100vh;
     width: 100%;
     background-color: #eff8ed;
-    padding: 20px;
+    padding: 20px; /* Base padding */
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -10,32 +13,69 @@
     justify-content: flex-start;
 }
 
+/* Style for the Table itself, to give it some visual presence */
 .withdrawal-history-container .ant-table-wrapper {
     width: 100%;
     max-width: 1200px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    padding: 15px;
+    padding: 15px; /* Base padding for the table wrapper */
     margin-top: 20px;
+    overflow-x: auto; /* Enable horizontal scrolling for the table content */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on touch devices */
 }
 
+/* Style for the Table header */
+.withdrawal-history-container .ant-table-thead > tr > th {
+    background-color: #f0f0f0; /* Light background for header */
+    color: #333;
+    font-weight: 600;
+    white-space: nowrap; /* Prevent header text from wrapping */
+    padding: 12px 16px; /* Adjust padding */
+    font-size: 0.9em; /* Reduced base font size for headers */
+}
+
+/* Style for table cells */
+.withdrawal-history-container .ant-table-tbody > tr > td {
+    white-space: nowrap; /* Prevent cell content from wrapping by default */
+    padding: 10px 16px; /* Adjust padding */
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.85em; /* Reduced base font size for cells */
+}
+
+/* Optional: Make first column sticky for better UX on scrollable tables */
+.withdrawal-history-container .ant-table-cell-fix-left {
+    position: sticky !important;
+    left: 0;
+    z-index: 1; /* Ensure it stays above other columns */
+    background-color: #fff; /* Match table background */
+    border-right: 1px solid #f0f0f0;
+}
+
+/* Style for the Modal content */
 .withdrawal-details-modal-content {
     padding: 15px 0;
     line-height: 1.8;
+    font-size: 0.9em; /* Reduced base font size for modal text */
+    color: #333;
 }
 
 .withdrawal-details-modal-content p {
     margin-bottom: 8px;
 }
 
+/* Specific class for the modal close button */
 .modal-close-button {
+    /* No specific styles needed here, Ant Design handles it well */
 }
 
+/* Ant Design Overrides for consistent primary button styling across components */
 .ant-btn-primary {
     background: linear-gradient(45deg, #38b000, #2a7a00) !important;
     border-color: #38b000 !important;
     color: white !important;
+    font-size: 0.9em; /* Slightly reduced button font size */
 }
 
 .ant-btn-primary:hover,
@@ -51,6 +91,101 @@
     box-shadow: none !important;
 }
 
+/* Ensure form item margins are consistent (if any forms exist in this component) */
 .ant-form-item {
     margin-bottom: 24px;
+}
+
+/* --- Responsive Adjustments with Media Queries --- */
+
+/* Adjusting the main title font size (assuming you use Ant Design Typography e.g., Title level={3}) */
+.withdrawal-history-container .ant-typography.ant-typography-h3 { /* Target specifically Ant Design H3 */
+    font-size: 1.8em !important; /* Slightly reduced base font size for the title */
+    margin-bottom: 15px !important;
+}
+
+
+@media (max-width: 1024px) {
+    .withdrawal-history-container {
+        padding: 15px; /* Slightly reduced padding */
+    }
+    .withdrawal-history-container .ant-table-wrapper {
+        padding: 10px;
+    }
+    .withdrawal-history-container .ant-table-thead > tr > th,
+    .withdrawal-history-container .ant-table-tbody > tr > td {
+        padding: 10px 14px;
+        font-size: 0.9em; /* Further reduced font size for table text */
+    }
+    .withdrawal-details-modal-content {
+        font-size: 0.88em; /* Further reduced font size */
+    }
+    .withdrawal-history-container .ant-typography.ant-typography-h3 {
+        font-size: 1.6em !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .withdrawal-history-container {
+        padding: 10px; /* Reduced padding for tablets */
+    }
+    .withdrawal-history-container .ant-table-wrapper {
+        margin-top: 15px;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        padding: 8px;
+    }
+    .withdrawal-history-container .ant-table-thead > tr > th,
+    .withdrawal-history-container .ant-table-tbody > tr > td {
+        padding: 8px 10px;
+        font-size: 0.85em; /* Even smaller font for table text */
+    }
+    .withdrawal-history-container .ant-table-cell-fix-left {
+        min-width: 80px;
+    }
+    .withdrawal-details-modal-content {
+        font-size: 0.83em; /* Even smaller font */
+    }
+    .withdrawal-details-modal-content p {
+        margin-bottom: 6px;
+    }
+    .withdrawal-history-container .ant-typography.ant-typography-h3 {
+        font-size: 1.4em !important;
+    }
+    .ant-btn-primary {
+        font-size: 0.85em; /* Smaller button font size */
+        height: 32px; /* Slightly shorter button */
+    }
+}
+
+@media (max-width: 576px) {
+    .withdrawal-history-container {
+        padding: 5px; /* Minimal padding for small phones */
+        justify-content: flex-start;
+    }
+    .withdrawal-history-container .ant-table-wrapper {
+        margin-top: 10px;
+        border-radius: 4px;
+        padding: 5px;
+    }
+    .withdrawal-history-container .ant-table-thead > tr > th,
+    .withdrawal-history-container .ant-table-tbody > tr > td {
+        padding: 6px 8px;
+        font-size: 0.8em; /* Smallest font for table cells */
+    }
+    .withdrawal-details-modal-content {
+        padding: 10px 0;
+        font-size: 0.8em; /* Smallest font for modal content */
+    }
+    .withdrawal-details-modal-content p {
+        margin-bottom: 5px;
+    }
+    .withdrawal-history-container .ant-typography.ant-typography-h3 {
+        font-size: 1.2em !important; /* Smallest title font size */
+        margin-bottom: 8px !important;
+    }
+    .ant-btn-primary {
+        font-size: 0.8em;
+        height: 30px;
+    }
 }

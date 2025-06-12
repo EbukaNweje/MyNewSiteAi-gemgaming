@@ -1,103 +1,408 @@
-.header_body{
+/* src/styles/header.css */
+
+.header_body {
     width: 100%;
-    height: 13vh;
+    height: 12vh;
     display: flex;
     align-items: center;
     position: sticky;
     top: 0;
-    left: 70px;
     z-index: 100;
     justify-content: center;
     background-color: white;
-     /* backdrop-filter: blur(10px); */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    /* border-radius:60px;
-    overflow: hidden;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);      */
+    box-sizing: border-box;
+    padding: 0 20px;
 }
-.header_wrapper{
-    width: 90%;
+
+.header_wrapper {
+    width: 100%;
+    max-width: 1200px;
     height: 90%;
     border-radius: 10px;
     background-color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
-   
-}
-.logo_holder{
-    width: 15%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 10px;
-}
-.texts{
-    width: 40%;
-    height: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    cursor: pointer;
+    box-sizing: border-box;
 }
 
-.texts h4{
-    font-family: "poppins",sans-serif;
+.logo_holder {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    padding-right: 15px;
+}
+
+.logo_card {
+    height: 100%;
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo_card img {
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.texts {
+    flex-grow: 1;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    gap: 25px;
+    padding: 0 15px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.texts::-webkit-scrollbar {
+    display: none;
+}
+
+
+.texts h4 {
+    font-family: "Poppins", sans-serif;
     font-size: 16px;
     font-weight: 500;
     display: flex;
     align-items: center;
     justify-content: center;
+    white-space: nowrap;
+    color: #333;
+    transition: color 0.2s ease;
+    text-align: center; /* Explicitly center for good measure */
 }
-.gamesDrop{
-    width: 150px;
-    height: 200px;
-    min-height: max-content;
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 8px;
-    position: absolute;
-    top: 100%;
+.texts h4:hover {
+    color: #38b000;
+}
+
+.texts .ant-dropdown-trigger {
+    color: #333;
+    text-decoration: none;
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    white-space: nowrap;
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: center; /* Ensure text and icon are centered within the trigger */
+    transition: color 0.2s ease;
 }
-.texts h4 span{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+.texts .ant-dropdown-trigger:hover {
+    color: #38b000;
 }
-.authActions{
-    width: 25%;
+.texts .ant-dropdown-trigger .anticon {
+    font-size: 14px;
+    margin-left: 5px;
+    transition: transform 0.2s ease;
+}
+.texts .ant-dropdown-open .anticon {
+    transform: rotate(180deg);
+}
+
+.authActions {
+    width: auto;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     gap: 15px;
-    padding: 20px;
+    padding-left: 15px;
+    flex-shrink: 0;
 }
 
-.logo_card{
-    width: 80px;
-    height: 50px;
-}
-
-.logo_card img{
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.authButtons{
+.authButtons {
     width: 80px;
     height: 35px;
     border: none;
     border-radius: 8px;
-    background-color: #38b000; /* Changed from purple to green */
+    background-color: #38b000;
     color: white;
     font-size: 14px;
-    font-family: "poppins",sans-serif;
+    font-family: "Poppins", sans-serif;
     cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    text-align: center; /* Ensure button text is centered */
+    display: flex; /* For perfect centering using flex */
+    align-items: center;
+    justify-content: center;
+}
+.authButtons:hover {
+    background-color: #2a7a00;
+    transform: translateY(-1px);
+}
+.authButtons:active {
+    transform: translateY(0);
+}
+
+.mobile_menu_icon {
+    display: none;
+    font-size: 40px;
+    cursor: pointer;
+    color: black;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.mobile_menu_container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: flex;
+    justify-content: flex-end;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.mobile_menu_container.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile_menu_content {
+    background: linear-gradient(#38b000, #2a7a00);
+    width: 280px;
+    max-width: 80%;
+    height: 100%;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-out;
+    padding: 20px;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-sizing: border-box;
+    align-items: center;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.mobile_menu_content::-webkit-scrollbar {
+    display: none;
+}
+
+.mobile_menu_container.open .mobile_menu_content {
+    transform: translateX(0);
+}
+
+.mobile_menu_header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.mobile_menu_header .logo_card {
+    height: 50px;
+    width: auto;
+}
+
+.mobile_menu_close_icon {
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+}
+
+.mobile_menu_links {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 5px;
+}
+
+.mobile_menu_links h4 {
+    color: white;
+    font-size: 18px;
+    padding: 12px 10px;
+    text-align: left;
+    width: 100%;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.mobile_menu_links h4:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.accordion_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 10px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left; /* Ensure text is left-aligned within the header */
+}
+
+.accordion_header:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.accordion_header .anticon {
+    transition: transform 0.2s ease;
+}
+
+.accordion_header.open .anticon {
+    transform: rotate(180deg);
+}
+
+.accordion_content {
+    background-color: rgba(255, 255, 255, 0.02);
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease-out;
+    border-radius: 0 0 5px 5px;
+    box-sizing: border-box;
+    padding: 0 10px;
+}
+
+.accordion_content.open {
+    max-height: 500px;
+    padding: 10px 10px 0 10px;
+}
+
+.accordion_content h5 {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 16px;
+    padding: 8px 0;
+    text-align: left; /* Explicitly center nested links */
+    width: 100%;
+    cursor: pointer;
+    transition: color 0.2s ease, background-color 0.2s ease;
+    border-radius: 3px;
+}
+
+.accordion_content h5:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.mobile_menu_auth_buttons {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+}
+
+.mobile_menu_auth_buttons .authButtons {
+    width: 100%;
+    height: 45px;
+    font-size: 16px;
+    background-color: #38b000;
+    border: 1px solid #6cd900;
+}
+.mobile_menu_auth_buttons .authButtons:last-child {
+    background-color: #2a7a00;
+}
+
+@media (max-width: 1024px) {
+    .header_body {
+        height: 8vh;
+        padding: 0 15px;
+    }
+
+    .header_wrapper {
+        width: 100%;
+    }
+
+    .logo_card {
+        height: 80%;
+    }
+
+    .texts {
+        gap: 15px;
+        padding: 0 10px;
+    }
+
+    .texts h4,
+    .texts .ant-dropdown-trigger {
+        font-size: 14px;
+    }
+
+    .authActions {
+        gap: 10px;
+        padding-left: 10px;
+    }
+
+    .authButtons {
+        width: 70px;
+        height: 30px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 840px) {
+    .header_body {
+        height: 70px;
+        padding: 0 15px;
+        justify-content: space-between;
+    }
+
+    .header_wrapper {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .texts,
+    .authActions {
+        display: none;
+    }
+
+    .mobile_menu_icon {
+        display: block;
+    }
+
+    .logo_holder {
+        padding-right: 0;
+        justify-content: flex-start;
+    }
+    .logo_card {
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header_body {
+        padding: 0 10px;
+    }
+    .mobile_menu_icon {
+        font-size: 26px;
+    }
+    .mobile_menu_content {
+        width: 260px;
+        max-width: 90%;
+    }
 }

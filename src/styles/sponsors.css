@@ -1,112 +1,397 @@
-.sponsor_body{
+/* Base Styles - for larger screens, and defaults */
+:root {
+    --primary-color: #38b000; /* Define this if it's not globally defined */
+}
+
+.sponsor_body {
     width: 100%;
-    height: 100vh;
+    /* Changed from fixed 100vh to auto with min-height */
+    height: auto;
+    min-height: 100vh; /* Ensures it takes full height on large screens */
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 40px 0; /* Add vertical padding for breathing room */
+    box-sizing: border-box; /* Include padding in element's total width/height */
 }
 
-.sponsor_wrapper{
+.sponsor_wrapper {
     width: 90%;
-    height: 90%;
-    /* background-color: red; */
+    /* Changed from fixed 90% to auto with min-height */
+    height: auto;
+    min-height: 90%;
+    display: flex; /* Added flex to ensure sections stack */
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center children horizontally */
+    gap: 40px; /* Space between sponsor_container and trophy_container */
+    max-width: 1200px; /* Limit overall width on very large screens */
 }
-.sponsor_container{
+
+.sponsor_container {
     width: 100%;
-    height: 40%;
+    /* Changed from fixed 40% to auto */
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center; /* Center text */
+    padding-bottom: 20px; /* Space before the list if needed */
 }
-.sponsor_container h2{
-    font-size: 2rem;
+
+.sponsor_container h2 {
+    font-size: 2.8rem; /* Larger base font size */
     color: var(--primary-color);
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem; /* More space below heading */
 }
 
-.sponsor_list{
-    width: 80%;
-    height: 80%;
+.sponsor_list {
+    width: 80%; /* Will adjust this in media queries */
+    height: auto; /* Allow height to adjust */
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Changed to center for better wrapping */
     align-items: center;
-    gap: 10px;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    gap: 20px; /* Gap between cards, will adjust */
 }
 
-.sponsor_card{
-    width: 25%;
-    height: 70%;
+.sponsor_card {
+    width: 22%; /* Slightly less than 25% to account for gap */
+    height: 120px; /* Fixed height for consistency, adjust in media queries */
     border-radius: 50px 0px 50px 0px;
     border: 3px solid #38b000;
     overflow: hidden;
+    flex-shrink: 0; /* Prevent shrinking below content size too much */
+    max-width: 180px; /* Prevent cards from getting too wide on very large screens */
 }
 
-.sponsor_card img{
+.sponsor_card img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain; /* Use 'contain' to show full logo without cropping */
+    display: block; /* Remove extra space below image */
 }
 
-.trophy_container{
+.trophy_container {
     width: 100%;
-    height: 70%;
+    /* Changed from fixed 70% to auto */
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-color: red; */
+    padding-top: 20px; /* Space above the trophy card */
 }
 
-.trophy_card{
-    width: 50%;
-    height: 80%;
+.trophy_card {
+    width: 50%; /* Will adjust in media queries */
+    min-height: 350px; /* Set a minimum height for the card */
+    max-height: 450px; /* Set a maximum height to control size on large screens */
     border: 2px solid #38b000;
     border-radius: 10px;
     overflow: hidden;
+    display: flex; /* Make trophy_card a flex container */
+    flex-direction: column; /* Stack its contents vertically */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    background-color: white; /* Ensure white background */
+    max-width: 450px; /* Limit max width of trophy card */
 }
 
-.trophy_header{
+.trophy_header {
     width: 100%;
-    height: 25%;
+    height: 25%; /* Consider auto or min-height for content flexibility */
+    min-height: 80px; /* Ensure minimum height */
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
     background-color: #38b000;
     color: white;
+    padding: 10px; /* Add internal padding */
+    box-sizing: border-box;
 }
 
-.trophy_icon{
-    font-size: 40px;
+.trophy_icon {
+    font-size: 2.5rem; /* Larger base size */
 }
-.trophy_header h4{
-    font-size: 1.5rem;
+
+.trophy_header h4 {
+    font-size: 1.8rem; /* Larger base size */
     font-weight: 400;
+    margin: 0; /* Remove default margin */
+    text-align: center;
 }
 
-.trophy_body{
+.trophy_body {
     width: 100%;
-    height: 60%;
+    height: 60%; /* Consider auto or flex-grow for content flexibility */
+    flex-grow: 1; /* Allows body to take available space */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px; /* More space between items */
+    padding: 20px; /* Internal padding for content */
+    box-sizing: border-box;
+    text-align: center;
 }
 
-.trophy_cta{
-    width: 150px;
-    height: 35px;
+/* Add some content to trophy_body for testing, e.g., a paragraph */
+.trophy_body p {
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.5;
+    max-width: 90%;
+}
+
+
+.trophy_cta {
+    width: 180px; /* Larger button for better touch target */
+    height: 45px; /* Taller button */
     border: none;
     background-color: #38b000;
     color: white;
     border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.trophy_footer{
+.trophy_cta:hover {
+    background-color: #329a00;
+}
+
+.trophy_footer {
     width: 100%;
-    height: 15%;
+    height: 15%; /* Consider auto or min-height */
+    min-height: 50px; /* Ensure minimum height */
     display: flex;
     justify-content: center;
     align-items: center;
     border-top: 2px solid #38b000;
+    padding: 10px; /* Add padding for content */
+    box-sizing: border-box;
+    font-size: 0.9em; /* Smaller font for footer text */
+    color: #777;
+}
+
+/* --- Media Queries --- */
+
+@media (max-width: 1024px) {
+    .sponsor_body {
+        padding: 30px 0;
+        min-height: 80vh; /* Adjust min-height */
+    }
+    .sponsor_wrapper {
+        width: 95%;
+        gap: 30px;
+    }
+    .sponsor_container h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1.2rem;
+    }
+    .sponsor_list {
+        width: 90%; /* Allow list to take more width */
+        gap: 15px;
+    }
+    .sponsor_card {
+        width: 28%; /* Allow 3 cards per row comfortably */
+        height: 100px;
+    }
+    .trophy_card {
+        width: 60%; /* Trophy card takes more width */
+        min-height: 320px;
+        max-height: 400px;
+    }
+    .trophy_icon {
+        font-size: 2.2rem;
+    }
+    .trophy_header h4 {
+        font-size: 1.6rem;
+    }
+    .trophy_body p {
+        font-size: 1em;
+    }
+    .trophy_cta {
+        width: 160px;
+        height: 42px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 768px) {
+    .sponsor_body {
+        padding: 25px 0;
+        min-height: auto; /* Let height be fully auto on smaller tablets */
+    }
+    .sponsor_wrapper {
+        width: 95%;
+        gap: 25px;
+    }
+    .sponsor_container h2 {
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+    }
+    .sponsor_list {
+        width: 95%;
+        gap: 10px;
+    }
+    .sponsor_card {
+        width: 30%; /* Will fit 3 cards per row */
+        height: 80px;
+        border-width: 2px; /* Thinner border */
+        border-radius: 40px 0px 40px 0px; /* Smaller radius */
+        max-width: 150px; /* Max width to prevent stretching too much */
+    }
+    .trophy_container {
+        padding-top: 15px;
+    }
+    .trophy_card {
+        width: 80%; /* Trophy card takes even more width */
+        min-height: 300px;
+        max-height: 380px;
+    }
+    .trophy_header {
+        min-height: 70px;
+        gap: 8px;
+        padding: 8px;
+    }
+    .trophy_icon {
+        font-size: 2rem;
+    }
+    .trophy_header h4 {
+        font-size: 1.4rem;
+    }
+    .trophy_body {
+        gap: 15px;
+        padding: 15px;
+    }
+    .trophy_body p {
+        font-size: 0.9em;
+    }
+    .trophy_cta {
+        width: 140px;
+        height: 38px;
+        font-size: 0.9em;
+    }
+    .trophy_footer {
+        min-height: 45px;
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 576px) {
+    .sponsor_body {
+        padding: 20px 0;
+    }
+    .sponsor_wrapper {
+        width: 95%;
+        gap: 20px;
+    }
+    .sponsor_container h2 {
+        font-size: 1.8rem;
+        margin-bottom: 0.8rem;
+    }
+    .sponsor_list {
+        width: 100%; /* Take full width */
+        gap: 15px 10px; /* Row-gap then column-gap */
+        justify-content: space-around; /* Distribute items evenly */
+    }
+    .sponsor_card {
+        width: 45%; /* Two cards per row */
+        height: 70px;
+        border-radius: 30px 0px 30px 0px;
+        max-width: 160px; /* Control max width on smaller screens */
+    }
+    .trophy_container {
+        padding-top: 10px;
+    }
+    .trophy_card {
+        width: 90%; /* Almost full width for the trophy card */
+        min-height: 280px;
+        max-height: 350px;
+    }
+    .trophy_header {
+        min-height: 60px;
+        gap: 6px;
+        padding: 6px;
+    }
+    .trophy_icon {
+        font-size: 2rem; /* Keep icon size decent */
+    }
+    .trophy_header h4 {
+        font-size: 1.2rem;
+    }
+    .trophy_body {
+        gap: 10px;
+        padding: 10px;
+    }
+    .trophy_body p {
+        font-size: 0.85em;
+    }
+    .trophy_cta {
+        width: 120px;
+        height: 35px;
+        font-size: 0.85em;
+    }
+    .trophy_footer {
+        min-height: 40px;
+        font-size: 0.75em;
+    }
+}
+
+@media (max-width: 420px) {
+    .sponsor_body {
+        padding: 15px 0;
+    }
+    .sponsor_wrapper {
+        gap: 15px;
+    }
+    .sponsor_container h2 {
+        font-size: 1.5rem;
+        margin-bottom: 0.6rem;
+    }
+    .sponsor_list {
+        gap: 10px 5px;
+    }
+    .sponsor_card {
+        width: 50%; /* Adjust to ensure two per row without overflow */
+        height: 60px;
+        border-width: 1px;
+        border-radius: 20px 0px 20px 0px;
+        max-width: 140px;
+    }
+    .trophy_card {
+        width: 95%; 
+        min-height: 250px;
+        max-height: 320px;
+    }
+    .trophy_header {
+        min-height: 50px;
+        gap: 5px;
+        padding: 5px;
+    }
+    .trophy_icon {
+        font-size: 1.8rem;
+    }
+    .trophy_header h4 {
+        font-size: 1rem;
+    }
+    .trophy_body {
+        gap: 8px;
+        padding: 8px;
+    }
+    .trophy_body p {
+        font-size: 0.8em;
+    }
+    .trophy_cta {
+        width: 120px;
+        height: 30px;
+        font-size: 0.8em;
+    }
+    .trophy_footer {
+        min-height: 35px;
+        font-size: 0.7em;
+    }
 }
