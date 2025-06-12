@@ -13,7 +13,6 @@ const Home = () => {
   return (
     <div className='home_body'>
         <Hero />
-        {/* <Herod /> */}
         <AboutCard />
         <GameCard />
         <Purchase />
