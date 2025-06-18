@@ -17,10 +17,10 @@ const Sponsors = () => {
       name: "Crypto",
       image: Crypto,
     },
-    {
-      name: "Kraken",
-      image: Kraken,
-    },
+    // {
+    //   name: "Kraken",
+    //   image: Kraken,
+    // },
     {
       name: "Coingecko",
       image: Coingecko,
