@@ -23,8 +23,9 @@ const Login = () => {
         email: values.userName,
         password: values.password,
       });
-      localStorage.setItem('id', response.data._id);
-      dispatch(setUserId(response?.data?._id)); 
+      localStorage.setItem('Userid', response.data._id);
+      // dispatch(setUserId(response.data._id)); 
+      console.log(`Login response:`, response.data._id);
       if (response.status === 200) { 
         notification.success({
           message: 'Login Successful',

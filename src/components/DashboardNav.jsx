@@ -23,6 +23,7 @@ const DashboardNav = () => {
   };
 
   const handleOk = () => {
+    localStorage.removeItem('Userid')
     console.log("Logged out");
     setIsModalOpen(false);
     navigate("/");
