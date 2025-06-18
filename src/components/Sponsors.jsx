@@ -3,7 +3,7 @@ import "../styles/sponsors.css"
 import Coinbase from "../assets/public/coinbase.png"
 import Crypto from "../assets/public/crypto.png"
 import Coingecko from "../assets/public/coinGecko.png"
-import Kraken from "../assets/public/kraken.png"
+// import Kraken from "../assets/public/kraken.png"
 import { GoTrophy } from "react-icons/go";
 
 

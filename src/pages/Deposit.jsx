@@ -1,228 +1,235 @@
-// src/pages/Deposit.jsx
 import React, { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
-import { Form, Select, Button, Card, Typography, Space, notification, Modal, Divider } from 'antd';
+import { Form, Select, Button, Card, Typography, Space, notification, Modal, Divider, InputNumber } from 'antd';
 import { CopyOutlined, WalletOutlined } from '@ant-design/icons';
-import QRCode from 'react-qr-code';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
-import '../styles/withdraw.css'; 
+import axios from 'axios';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
 
 const Deposit = () => {
-  const { cryptocurrency: paramCrypto } = useParams();
+  const userId = localStorage.getItem('Userid'); 
   const [form] = Form.useForm();
 
   const [loading, setLoading] = useState(false);
-  const [currentCrypto, setCurrentCrypto] = useState('BTC');
-  const [selectedNetwork, setSelectedNetwork] = useState(undefined);
+  const [currentCrypto, setCurrentCrypto] = useState('BTC'); 
+  const [selectedNetwork, setSelectedNetwork] = useState('default'); 
+  const [depositAmount, setDepositAmount] = useState(0);
   const [depositAddress, setDepositAddress] = useState('');
+  const [transactionId, setTransactionId] = useState('');
 
   const [isReceiptModalVisible, setIsReceiptModalVisible] = useState(false);
   const [receiptDetails, setReceiptDetails] = useState(null);
-  const receiptContentRef = useRef(null); 
-  const [downloadLoading, setDownloadLoading] = useState(false);
+  const receiptContentRef = useRef(null);
+  const [printLoading, setPrintLoading] = useState(false);
 
-  const mockDepositAddresses = {
-    BTC: {
-      default: 'bc1qxw5j9j2p3k4l5m6n7o8q9r0s1t2u3v4w5x6y7z8a9b0c1d2e3f4g5h6i7j8k9l0m',
-    },
-    ETH: {
-      ERC20: '0x742d35Cc6634C0539Ff82869B2c219C74DF6Bc09',
-    },
-    USDT: {
-      ERC20: '0xAbc123DeF456aBc789012345678901234567890',
-      TRC20: 'TR7NHqjsudtPZphP6Bv5b7bU8U8y7E7c2cQ',
-    },
+  const API_URL = 'https://my-new-site-ai-gemgaming-backend.vercel.app/api';
+
+  const openNotificationWithIcon = (type, message, description, placement = 'topRight', duration = 4.5) => {
+    const config = {
+      message: message,
+      description: description,
+      placement: placement,
+      duration: duration,
+    };
+
+    switch (type) {
+      case 'success':
+        notification.success(config);
+        break;
+      case 'error':
+        notification.error(config);
+        break;
+      case 'info':
+        notification.info(config);
+        break;
+      case 'warn':
+        notification.warning(config); 
+        break;
+      default:
+        notification.open(config);
+        break;
+    }
   };
 
   useEffect(() => {
-    if (paramCrypto) {
-      const formattedCrypto = paramCrypto.toUpperCase();
-      setCurrentCrypto(formattedCrypto);
-      form.setFieldsValue({ cryptocurrency: formattedCrypto });
+    setCurrentCrypto('BTC');
+    setSelectedNetwork('default');
+    form.setFieldsValue({ cryptocurrency: 'BTC', network: 'default' });
+  }, [form]);
 
-      if (formattedCrypto === 'ETH') {
-        setSelectedNetwork('ERC20');
-        form.setFieldsValue({ network: 'ERC20' });
-      } else if (formattedCrypto === 'USDT') {
-        setSelectedNetwork('ERC20');
-        form.setFieldsValue({ network: 'ERC20'});
-      } else {
-        setSelectedNetwork('default');
-        form.setFieldsValue({ network: 'default' });
-      }
-    } else {
-      setCurrentCrypto('BTC');
-      setSelectedNetwork('default');
-      form.setFieldsValue({ cryptocurrency: 'BTC', network: 'default' });
-    }
-  }, [paramCrypto, form]);
+  const onAmountChange = (value) => {
+    setDepositAmount(value);
+    setDepositAddress(''); 
+    setTransactionId('');
+  };
 
-  useEffect(() => {
-    if (currentCrypto && selectedNetwork) {
-      setLoading(true);
-      setTimeout(() => {
-        let address = '';
-
-        if (currentCrypto === 'BTC') {
-          address = mockDepositAddresses.BTC.default;
-        } else if (currentCrypto === 'ETH' && selectedNetwork === 'ERC20') {
-          address = mockDepositAddresses.ETH.ERC20;
-        } else if (currentCrypto === 'USDT') {
-          if (selectedNetwork === 'ERC20') {
-            address = mockDepositAddresses.USDT.ERC20;
-          } else if (selectedNetwork === 'TRC20') {
-            address = mockDepositAddresses.USDT.TRC20;
-          }
-        } else {
-          address = 'N/A: Select a valid network';
-        }
-        setDepositAddress(address);
-        setLoading(false);
-      }, 500);
-    } else {
-      setDepositAddress('');
-    }
-  }, [currentCrypto, selectedNetwork]);
-
-  const handleCopyAddress = async () => {
-    if (depositAddress) {
+  const handleCopyAddress = () => {
+    if (depositAddress && depositAddress !== 'Error fetching address') {
       try {
-        await navigator.clipboard.writeText(depositAddress);
-        notification.success({
-          message: 'Address Copied!',
-          description: 'The deposit address has been copied to your clipboard.',
-          placement: 'bottomRight',
-        });
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(depositAddress);
+        } else {
+          const textArea = document.createElement("textarea");
+          textArea.value = depositAddress;
+          textArea.style.position = "fixed";
+          document.body.appendChild(textArea);
+          textArea.focus();
+          textArea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textArea);
+        }
+        openNotificationWithIcon('success', 'Address Copied!', 'The deposit address has been copied to your clipboard.', 'bottomRight');
       } catch (err) {
-        notification.error({
-          message: 'Copy Failed',
-          description: 'Could not copy address. Please try manually.',
-          placement: 'bottomRight',
-        });
+        openNotificationWithIcon('error', 'Copy Failed', 'Could not copy address. Please try manually.', 'bottomRight');
       }
     }
   };
 
   const onCryptoChange = (value) => {
     setCurrentCrypto(value);
-    setSelectedNetwork(undefined);
+    setSelectedNetwork(undefined); 
     form.setFieldsValue({ network: undefined });
+    setDepositAddress(''); 
+    setTransactionId(''); 
   };
 
   const onNetworkChange = (value) => {
     setSelectedNetwork(value);
+    setDepositAddress(''); 
+    setTransactionId(''); 
   };
 
-  const handleDepositedConfirmation = () => {
-    if (!depositAddress || depositAddress === 'N/A: Select a valid network') {
-      notification.warn({
-        message: 'No Deposit Address',
-        description: 'Please select cryptocurrency and network to get a deposit address first.',
-        placement: 'topRight',
-      });
+  const handleDepositedConfirmation = async () => {
+    if (!currentCrypto || !selectedNetwork) {
+      openNotificationWithIcon('warn', 'Missing Selection', 'Please select both cryptocurrency and network.', 'topRight');
+      return;
+    }
+    if (depositAmount <= 0) {
+      openNotificationWithIcon('warn', 'Invalid Amount', 'Please enter a valid amount greater than zero.', 'topRight');
       return;
     }
 
-    const depositTime = new Date().toLocaleString();
-    const mockTransactionId = `DEP${Date.now()}${Math.floor(Math.random() * 1000)}`;
+    setLoading(true);
+    try {
+      const payload = {
+        coin: currentCrypto,
+        amount: parseFloat(depositAmount),
+      };
 
-    setReceiptDetails({
-      cryptocurrency: currentCrypto,
-      network: selectedNetwork,
-      depositAddress: depositAddress,
-      depositTime: depositTime,
-      transactionId: mockTransactionId,
-      status: 'Awaiting Deposit',
-    });
-    setIsReceiptModalVisible(true);
+      const response = await axios.post(`${API_URL}/deposit/${userId}`, payload);
+      const result = response.data;
 
-    notification.info({
-      message: 'Deposit Initiated!',
-      description: 'Your deposit is being awaited. Please send crypto to the address shown in the receipt.',
-      placement: 'topRight',
-      duration: 5,
-    });
+      if (response.status === 200) {
+        // const { transactionId, depositAddress } = result.data;
+        console.log(response.data)
+        // setDepositAddress(depositAddress);
+        // setTransactionId(transactionId);
+        // openNotificationWithIcon('success', 'Deposit Address Fetched!', 'Proceeding to receipt. Please send funds to the address shown.', 'bottomRight');
 
-    setTimeout(() => {
-      setReceiptDetails(prevDetails => {
-        if (prevDetails && prevDetails.transactionId === mockTransactionId) {
-          notification.success({
-            message: 'Deposit Confirmed!',
-            description: `Your deposit of ${currentCrypto} has been confirmed. Transaction ID: ${mockTransactionId}`,
-            placement: 'topRight',
-            duration: 8,
+        const depositTime = new Date().toLocaleString();
+        setReceiptDetails({
+          cryptocurrency: currentCrypto,
+          network: selectedNetwork,
+          depositAddress: depositAddress,
+          depositTime: depositTime,
+          transactionId: transactionId,
+          status: 'Awaiting Confirmation',
+          amount: depositAmount,
+        });
+        setIsReceiptModalVisible(true);
+
+        openNotificationWithIcon('info', 'Deposit Initiated!', 'Your deposit is being awaited. Please send crypto to the address shown in the receipt.', 'topRight', 5);
+
+        setTimeout(() => {
+          setReceiptDetails(prevDetails => {
+            if (prevDetails && prevDetails.transactionId === transactionId) {
+              openNotificationWithIcon('success', 'Deposit Confirmed!', `Your deposit of ${prevDetails.amount} ${prevDetails.cryptocurrency} has been confirmed. Transaction ID: ${transactionId}`, 'topRight', 8);
+              return { ...prevDetails, status: 'Confirmed' };
+            }
+            return prevDetails;
           });
-          return { ...prevDetails, status: 'Confirmed' }; 
-        }
-        return prevDetails; 
-      });
-    }, 8000);
+        }, 8000);
+
+      } else {
+        openNotificationWithIcon('error', 'Deposit Address Error', result.message || 'Failed to get deposit address. Please try again.', 'bottomRight');
+        setDepositAddress('');
+        setTransactionId('');
+      }
+    } catch (err) {
+      if (err.response) {
+        openNotificationWithIcon('error', 'API Error', err.response.data.message || 'Server error. Please try again.', 'bottomRight');
+      } else if (err.request) {
+        openNotificationWithIcon('error', 'Network Error', 'No response from server. Check your internet connection.', 'bottomRight');
+      } else {
+        openNotificationWithIcon('error', 'Request Failed', err.message || 'An unexpected error occurred.', 'bottomRight');
+      }
+      console.error("Error during deposit initiation:", err);
+      setDepositAddress('');
+      setTransactionId('');
+    } finally {
+      setLoading(false); 
+    }
   };
 
   const handleReceiptModalClose = () => {
     setIsReceiptModalVisible(false);
     setReceiptDetails(null);
+    setDepositAddress(''); 
+    setTransactionId(''); 
+    setDepositAmount(0); 
+    form.resetFields(['amount']);
   };
 
-  const handleDownloadReceipt = async () => {
-    if (!receiptContentRef.current) {
-      notification.error({
-        message: 'Download Failed',
-        description: 'Receipt content not found.',
-        placement: 'topRight',
-      });
-      return;
-    }
+  const handlePrintReceipt = () => {
+    const printContent = receiptContentRef.current;
+    if (printContent) {
+      setPrintLoading(true);
+      const printWindow = window.open('', '_blank', 'height=600,width=800');
+      if (printWindow) {
+        printWindow.document.write('<html><head><title>Deposit Receipt</title>');
+        printWindow.document.write('<style>');
+        printWindow.document.write(`
+                  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; margin: 20px; }
+                  .receipt-header, .receipt-section, .receipt-footer { padding: 10px 0; }
+                  .receipt-header { text-align: center; }
+                  .receipt-title { margin-bottom: 10px; }
+                  .receipt-row { display: flex; justify-content: space-between; margin-bottom: 5px; }
+                  .receipt-label { font-weight: bold; }
+                  .receipt-value { word-break: break-all; text-align: right; }
+                  .receipt-value.address, .receipt-value.id { font-family: monospace; }
+                  .receipt-divider { margin: 15px 0; border-top: 1px dashed #eee; }
+                  .receipt-footer { font-size: 0.8em; color: #666; text-align: center; }
+                  .status-awaiting-confirmation { color: orange; }
+                  .status-confirmed { color: green; }
+              `);
+        printWindow.document.write('</style>');
+        printWindow.document.write('</head><body>');
+        printWindow.document.write(printContent.outerHTML);
+        printWindow.document.close();
 
-    setDownloadLoading(true);
-    try {
-      const canvas = await html2canvas(receiptContentRef.current, { scale: 3, useCORS: true });
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'a4');
-
-      const imgWidth = 210;
-      const pageHeight = 297;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      let heightLeft = imgHeight;
-      let position = 0;
-
-      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-
-      while (heightLeft >= 0) {
-        position = heightLeft - imgHeight;
-        pdf.addPage();
-        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
+        printWindow.onload = () => {
+          printWindow.focus();
+          printWindow.print();
+          printWindow.close();
+          setPrintLoading(false);
+        };
+      } else {
+        setPrintLoading(false);
+        openNotificationWithIcon('error', 'Print Failed', 'Could not open print window. Please check your browser settings.', 'topRight');
       }
-
-      const filename = `deposit_receipt_${receiptDetails.transactionId || Date.now()}.pdf`;
-      pdf.save(filename);
-      notification.success({
-        message: 'Receipt Downloaded',
-        description: `Your receipt has been downloaded as ${filename}`,
-        placement: 'topRight',
-      });
-    } catch (error) {
-      console.error("Error generating PDF:", error);
-      notification.error({
-        message: 'Download Failed',
-        description: 'Could not generate the PDF receipt. Please try again.',
-        placement: 'topRight',
-      });
-    } finally {
-      setDownloadLoading(false);
+    } else {
+      openNotificationWithIcon('error', 'Print Failed', 'Receipt content not available for printing.', 'topRight');
+      setPrintLoading(false);
     }
   };
+
+  const isDepositButtonEnabled = !loading && currentCrypto && selectedNetwork && depositAmount > 0;
 
   return (
-    <div className="withdraw-page-container">
+    <div className="withdraw-page-container" style={{ padding: '20px' }}>
       <Card
         className="withdraw-card"
+        style={{ maxWidth: '500px', margin: 'auto' }}
         title={<Title level={3} style={{ textAlign: 'center', margin: 0, color: '#38b000' }}>Deposit {currentCrypto}</Title>}
       >
         <Form
@@ -230,8 +237,9 @@ const Deposit = () => {
           layout="vertical"
           name="deposit_form"
           initialValues={{
-            cryptocurrency: currentCrypto,
-            network: selectedNetwork,
+            cryptocurrency: currentCrypto, 
+            network: selectedNetwork,     
+            amount: depositAmount,
           }}
         >
           <Form.Item
@@ -242,7 +250,6 @@ const Deposit = () => {
             <Select placeholder="Select a crypto" size="large" onChange={onCryptoChange}>
               <Option value="BTC">Bitcoin (BTC)</Option>
               <Option value="ETH">Ethereum (ETH)</Option>
-              <Option value="USDT">Tether (USDT)</Option>
             </Select>
           </Form.Item>
 
@@ -254,16 +261,29 @@ const Deposit = () => {
             <Select placeholder="Select a network" size="large" onChange={onNetworkChange}>
               {currentCrypto === 'BTC' && <Option value="default">Bitcoin Network</Option>}
               {currentCrypto === 'ETH' && <Option value="ERC20">ERC20 (Ethereum)</Option>}
-              {currentCrypto === 'USDT' && (
-                <>
-                  <Option value="ERC20">ERC20 (Ethereum)</Option>
-                  <Option value="TRC20">TRC20 (Tron)</Option>
-                </>
-              )}
             </Select>
           </Form.Item>
 
-          {depositAddress && !loading && (
+          <Form.Item
+            label="Amount"
+            name="amount"
+            rules={[
+              { required: true, message: 'Please enter the deposit amount!' },
+              { type: 'number', min: 0.000001, message: 'Amount must be greater than zero!' },
+            ]}
+          >
+            <InputNumber
+              min={0.000001}
+              step={0.000001}
+              placeholder="e.g., 0.001"
+              size="large"
+              style={{ width: '100%' }}
+              onChange={onAmountChange}
+              value={depositAmount}
+            />
+          </Form.Item>
+
+          {depositAddress && transactionId && !loading && (
             <div style={{ textAlign: 'center', marginBottom: 24 }}>
               <Text strong>Your Deposit Address ({selectedNetwork}):</Text>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, marginTop: 8, marginBottom: 16 }}>
@@ -272,22 +292,13 @@ const Deposit = () => {
                 </Text>
                 <Button icon={<CopyOutlined />} onClick={handleCopyAddress} type="text" />
               </div>
-
-              <div style={{ border: '1px solid #f0f0f0', borderRadius: 8, padding: 10, display: 'inline-block' }}>
-                {depositAddress && (
-                  <QRCode
-                    value={depositAddress}
-                    size={150}
-                  />
-                )}
-              </div>
             </div>
           )}
 
           {loading && (
-              <div style={{ textAlign: 'center', marginBottom: 24 }}>
-                <Text type="secondary">Generating deposit address...</Text>
-              </div>
+            <div style={{ textAlign: 'center', marginBottom: 24 }}>
+              <Text type="secondary">Fetching deposit details...</Text>
+            </div>
           )}
 
           <div style={{ marginBottom: 24, padding: '12px 0', borderTop: '1px solid #f0f0f0', borderBottom: '1px solid #f0f0f0' }}>
@@ -299,7 +310,7 @@ const Deposit = () => {
                 1. Send only **{currentCrypto}** to this address. Sending any other asset may result in loss.
               </Text>
               <Text type="secondary" style={{ fontSize: '0.85em' }}>
-                2. Ensure the selected network is **{selectedNetwork}**. Deposits on incorrect networks may be lost.
+                2. Ensure the selected network is **{selectedNetwork || 'N/A'}**. Deposits on incorrect networks may be lost.
               </Text>
               <Text type="secondary" style={{ fontSize: '0.85em' }}>
                 3. This address is valid for multiple deposits.
@@ -314,26 +325,26 @@ const Deposit = () => {
               size="large"
               onClick={handleDepositedConfirmation}
               style={{ backgroundColor: '#38b000', borderColor: '#38b000' }}
+              disabled={!isDepositButtonEnabled || loading}
             >
-              I Have Deposited
+              {loading ? 'Processing...' : 'Initiate Deposit'}
             </Button>
           </Form.Item>
         </Form>
       </Card>
 
-      {/* --- Deposit Receipt Modal --- */}
       <Modal
         title={null}
         open={isReceiptModalVisible}
         onCancel={handleReceiptModalClose}
         footer={[
           <Button
-            key="download"
-            onClick={handleDownloadReceipt}
-            loading={downloadLoading}
+            key="print"
+            onClick={handlePrintReceipt}
+            loading={printLoading}
             style={{ backgroundColor: '#38b000', borderColor: '#38b000', color: 'white' }}
           >
-            {downloadLoading ? 'Generating...' : 'Download Receipt'}
+            {printLoading ? 'Preparing Print...' : 'Print Receipt'}
           </Button>,
           <Button key="ok" onClick={handleReceiptModalClose}>
             Got It
@@ -362,6 +373,10 @@ const Deposit = () => {
               <div className="receipt-row">
                 <Text className="receipt-label">Network:</Text>
                 <Text className="receipt-value">{receiptDetails.network}</Text>
+              </div>
+              <div className="receipt-row">
+                <Text className="receipt-label">Amount:</Text>
+                <Text className="receipt-value">{receiptDetails.amount}</Text>
               </div>
               <div className="receipt-row">
                 <Text className="receipt-label">Deposit Address:</Text>
