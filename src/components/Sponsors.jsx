@@ -1,9 +1,9 @@
 import React from 'react'
 import "../styles/sponsors.css"
-import Coinbase from "../assets/public/coinbase.png"
-import Crypto from "../assets/public/crypto.png"
-import Coingecko from "../assets/public/coinGecko.png"
-import Kraken from "../assets/public/kraken.png"
+import Coinbase from "../assets/public/coinbaseBg.png"
+import Crypto from "../assets/public/crypto-bg.png"
+import Coingecko from "../assets/public/coinGecko copy.png"
+import Kraken from "../assets/public/KrakenLogo.png"
 import { GoTrophy } from "react-icons/go";
 
 

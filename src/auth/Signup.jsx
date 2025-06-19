@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Form, Input, Button, Card, Typography, notification } from 'antd';
 import { UserOutlined, MailOutlined, LockOutlined } from '@ant-design/icons';
-import '../../styles/login.css'; 
+import '../styles/login.css'; 
 import axios from 'axios'; 
 
 const { Title } = Typography;

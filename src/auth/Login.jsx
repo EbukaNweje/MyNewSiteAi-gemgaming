@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Form, Input, Button, Card, Typography, notification } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import "../../styles/login.css";
+import "../styles/login.css";
 import axios from 'axios'; 
 import { useDispatch } from 'react-redux';
-import { setUserId } from '../../global/UserData';
 
 const { Title } = Typography;
 

@@ -48,7 +48,7 @@ const Dashboard = () => {
 
   const handleDepositModalOk = () => {
     setIsDepositModalVisible(false);
-    navigate(`/deposit/${depositCrypto}`);
+    navigate("/deposit");
   };
 
   const handleDepositModalCancel = () => {
@@ -62,7 +62,7 @@ const Dashboard = () => {
 
   const handleWithdrawModalOk = () => {
     setIsWithdrawModalVisible(false);
-    navigate(`/withdraw/${withdrawCrypto}`);
+    navigate('/withdraw');
   };
 
   const handleWithdrawModalCancel = () => {

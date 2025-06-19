@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Card, Spin, Result, Button, notification, Typography } from 'antd';
 import { CheckCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
-import '../../styles/login.css'; // Reusing your existing styles
+import '../styles/login.css'; // Reusing your existing styles
 
 const { Title } = Typography;
 

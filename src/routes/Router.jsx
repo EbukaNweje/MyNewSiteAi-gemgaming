@@ -15,11 +15,11 @@ import Dashboard from "../pages/Dashboard";
 import Withdraw from "../pages/withdraw";
 import Deposit from "../pages/Deposit";
 import WithdrawalHistory from "../pages/WithdrawalHistory ";
-import Login from "../assets/auth/Login";
-import Signup from "../assets/auth/Signup";
-import ForgotPassword from "../assets/auth/ForgotPassword";
-import ResetPassword from "../assets/auth/ResetPassword";
-import VerifyEmail from "../assets/auth/VerifyEmail";
+import Login from "../auth/Login";
+import Signup from "../auth/Signup";
+import ForgotPassword from "../auth/ForgotPassword";
+import ResetPassword from "../auth/ResetPassword";
+import VerifyEmail from "../auth/VerifyEmail";
 import UserProfile from "../pages/UserProfile";
 import TransactionHistory from "../pages/TransactionHistory";
 import VerifyAccount from "../pages/VerifyAccount";
@@ -76,11 +76,11 @@ export const Element = createBrowserRouter([
          element: <Dashboard/>
       },
       {
-         path: "withdraw/:cryptocurrency",
+         path: "withdraw",
          element: <Withdraw/>
       },
       {
-         path: "deposit/:cryptocurrency",
+         path: "deposit",
          element: <Deposit/>
       },
       {

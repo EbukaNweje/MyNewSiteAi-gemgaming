@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Form, Input, Button, Card, Typography, notification } from 'antd';
 import { LockOutlined } from '@ant-design/icons';
-import '../../styles/login.css';
+import '../styles/login.css';
 
 const { Title } = Typography;
 

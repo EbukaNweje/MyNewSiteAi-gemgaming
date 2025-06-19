@@ -1,5 +1,3 @@
-/* src/styles/dashboard.css */
-
 .dashboard_body {
     width: 100%;
     min-height: 100vh;
@@ -20,18 +18,17 @@
     gap: 20px;
 }
 .dashboard_username {
-  font-size: 2.2em; /* Makes the text larger */
-    font-weight: 700; /* Makes it bold */
-    text-align: center; /* Centers the text */
-    margin-bottom: 20px; /* Adds space below the username */
-    color: #38b000; /* Sets the text color to your brand green */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
-    letter-spacing: 1px; /* Spreads out the letters slightly */
-    padding: 10px 0; /* Adds vertical padding around the text */
-    animation: fadeInDown 0.8s ease-out; /* Adds a smooth animation */
+    font-size: 2.2em; 
+    font-weight: 700; 
+    text-align: center; 
+    margin-bottom: 20px; 
+    color: #38b000;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+    padding: 10px 0; 
+    animation: fadeInDown 0.8s ease-out; 
 }
 
-/* Optional: Define the animation */
 @keyframes fadeInDown {
     from {
         opacity: 0;
@@ -123,7 +120,6 @@
     padding: 1rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     width: 100%;
-    overflow-x: auto;
 }
 
 .table_header {
@@ -138,7 +134,7 @@
 
 .table_body .ant-table-wrapper {
     border-radius: 10px;
-    overflow: hidden;
+    overflow: hidden; 
 }
 
 .crypto-action-buttons-container {
@@ -205,6 +201,7 @@
 .ant-form-item {
     margin-bottom: 24px;
 }
+
 
 @media (max-width: 840px) {
     .dashboard_body {
@@ -282,7 +279,7 @@
     .wallet_amount {
         font-size: 22px;
     }
-    
+
     .chart_header h4 {
         font-size: 18px;
     }
@@ -366,6 +363,11 @@
         justify-content: center;
         flex-wrap: nowrap;
     }
+
+   .ant-table-cell {
+        padding: 8px !important;
+        font-size: 0.75rem;   
+    }
 }
 
 @media (max-width: 390px) {
@@ -415,5 +417,10 @@
 
     .crypto-action-buttons-container {
         gap: 6px;
+    }
+
+    .ant-table-cell {
+        padding: 6px !important; 
+        font-size: 0.7rem;   
     }
 }

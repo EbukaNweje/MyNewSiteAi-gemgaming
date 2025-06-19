@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Card, Typography, notification } from 'antd';
 import { MailOutlined } from '@ant-design/icons';
 import axios from 'axios'; 
-import '../../styles/login.css'; // Reusing your existing styles (ensure this path is correct)
+import '../styles/login.css'; // Reusing your existing styles (ensure this path is correct)
 
 const { Title } = Typography;
 
