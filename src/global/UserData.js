@@ -10,7 +10,8 @@ const userData = createSlice({
   reducers: {
     setUserId: (state, action) => {
         state.userId = action.payload;
-        }
+        console.log("User ID set to:", state.userId); 
+     }
   },
 });
 
